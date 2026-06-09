@@ -87,3 +87,7 @@ android/replay_pid*.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Debug screenshots & UI dumps (session artifacts)
+/*.png
+/u.xml

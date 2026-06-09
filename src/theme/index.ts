@@ -45,6 +45,31 @@ export const FlowColors: Record<string, string> = {
   W: '#6B4EB8',   // indigo
 };
 
+// Playful pastel palette — soft, rounded, friendly (Two-Dots inspired).
+export const Pastel = {
+  bg:        '#FBF7F0',   // warm off-white
+  bgAlt:     '#F3ECE0',   // panel
+  card:      '#FFFFFF',
+  cardAlt:   '#F7F1E8',
+
+  ink:       '#2E2A3A',   // primary text (soft near-black plum)
+  inkSoft:   '#6C6680',   // secondary
+  inkDim:    '#A9A2B8',   // tertiary
+
+  // candy accents
+  mint:      '#5CC9A7',
+  sky:       '#5BA9F0',
+  coral:     '#FF7B6B',
+  sun:       '#FFC24B',
+  grape:     '#9B7BE8',
+  bubble:    '#FF8FC8',
+  teal:      '#2FC4C9',
+
+  heart:     '#FF5A6E',   // lives
+  coin:      '#FFC24B',   // coins
+  shadow:    '#2E2A3A',
+};
+
 export const Spacing = {
   xs: 4,
   sm: 8,

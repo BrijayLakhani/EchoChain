@@ -1,8 +1,14 @@
-import React, {useRef, useMemo} from 'react';
-import {View, StyleSheet, Dimensions, PanResponder} from 'react-native';
+import React, {useRef, useMemo, useEffect} from 'react';
+import {View, Text, StyleSheet, Dimensions, PanResponder, Animated} from 'react-native';
 import {FlowLevel} from '../engine/types';
 import {Paths, getPathColor, isEndpoint, pathContains} from '../engine/flowEngine';
 import {FlowColors, Colors} from '../theme';
+import {useSettingsStore} from '../store/settingsStore';
+
+// Distinct glyph per color — used in Colorblind mode to tell pipes apart.
+const CB_SYMBOL: Record<string, string> = {
+  R:'✦', B:'■', G:'▲', Y:'●', O:'◆', P:'★', T:'✚', K:'⬟', N:'❖', W:'⬢',
+};
 
 interface Props {
   level:       FlowLevel;
@@ -60,11 +66,11 @@ function buildGrid(level: FlowLevel, paths: Paths, activeKey: string | null): Ce
 
 // ── Cell — only re-renders when its own data changes ─────────────────────────
 const Cell = React.memo(
-  function Cell({info, sz}: {info: CellInfo; sz: number}) {
+  function Cell({info, sz, cb, pulse}: {info: CellInfo; sz: number; cb: boolean; pulse: Animated.Value}) {
     const {pathColor, endColor, top, bottom, left, right, active} = info;
     const color = pathColor ? getColor(pathColor) : null;
-    const PIPE  = Math.round(sz * 0.38);
-    const DOT   = Math.round(sz * 0.58);
+    const PIPE  = Math.round(sz * 0.44);   // thicker pipes
+    const DOT   = Math.round(sz * 0.66);   // larger endpoint dots
     const H     = Math.round(sz / 2);
 
     return (
@@ -78,17 +84,27 @@ const Cell = React.memo(
           <View style={[s.abs,{left:H-PIPE/2,top:H-PIPE/2,width:PIPE,height:PIPE,borderRadius:PIPE/2,backgroundColor:color}]}/>
         </>}
         {endColor && (
-          <View style={[s.abs, {
+          <Animated.View style={[s.abs, {
             left:(sz-DOT)/2, top:(sz-DOT)/2,
             width:DOT, height:DOT, borderRadius:DOT/2,
             backgroundColor:getColor(endColor), zIndex:2,
-          }]}/>
+            alignItems:'center', justifyContent:'center',
+            transform:[{scale: pulse}],
+          }]}>
+            {cb && (
+              <Text style={{color:'#fff', fontSize:Math.round(DOT*0.5), fontWeight:'900'}}>
+                {CB_SYMBOL[endColor] ?? ''}
+              </Text>
+            )}
+          </Animated.View>
         )}
       </View>
     );
   },
   (prev, next) =>
     prev.sz === next.sz &&
+    prev.cb === next.cb &&
+    prev.pulse === next.pulse &&
     prev.info.pathColor === next.info.pathColor &&
     prev.info.endColor  === next.info.endColor  &&
     prev.info.top    === next.info.top    &&
@@ -103,6 +119,20 @@ export default function FlowGrid({level, paths, activeKey, onDragStart, onDragMo
   const N  = level.gridSize;
   const sz = cellSize(N);
   const step = sz + GAP;
+  const cb = useSettingsStore(s => s.colorblind);
+
+  // Gentle endpoint-dot pulse so the board feels alive.
+  const pulse = useRef(new Animated.Value(1)).current;
+  useEffect(() => {
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulse, {toValue: 1.12, duration: 720, useNativeDriver: true}),
+        Animated.timing(pulse, {toValue: 1,    duration: 720, useNativeDriver: true}),
+      ]),
+    );
+    loop.start();
+    return () => loop.stop();
+  }, []);
 
   // ── Refs — the PanResponder reads these so it's always up-to-date
   //    even though the PanResponder object itself is created only once.
@@ -159,7 +189,7 @@ export default function FlowGrid({level, paths, activeKey, onDragStart, onDragMo
 
   // Measure the grid's absolute screen position after it lays out.
   function onLayout() {
-    gridRef.current?.measure((_x, _y, _w, _h, px, py) => {
+    gridRef.current?.measureInWindow((px, py) => {
       gx.current = px;
       gy.current = py;
     });
@@ -184,7 +214,7 @@ export default function FlowGrid({level, paths, activeKey, onDragStart, onDragMo
       {grid.map((row, r) => (
         <View key={r} style={s.row}>
           {row.map((info, c) => (
-            <Cell key={c} info={info} sz={sz} />
+            <Cell key={c} info={info} sz={sz} cb={cb} pulse={pulse} />
           ))}
         </View>
       ))}
@@ -197,7 +227,7 @@ const s = StyleSheet.create({
   row:  {flexDirection: 'row', gap: GAP},
   cell: {
     backgroundColor: Colors.cellEmpty,
-    borderRadius: 7,
+    borderRadius: 9,
     overflow: 'hidden',
   },
   abs: {position: 'absolute'},

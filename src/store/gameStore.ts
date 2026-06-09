@@ -2,8 +2,9 @@ import {create} from 'zustand';
 import {FlowLevel} from '../engine/types';
 import {
   Paths, Path,
-  isEndpoint, getPathColor, isAdjacent, isComplete, pathContains,
+  isEndpoint, getPathColor, isAdjacent, isComplete, pathContains, solvePipePath,
 } from '../engine/flowEngine';
+import {sfx} from '../audio/sfx';
 
 interface GameState {
   level: FlowLevel | null;
@@ -18,6 +19,17 @@ interface GameState {
   continueDraw: (row: number, col: number) => void;
   endDraw: () => void;
   resetLevel: () => void;
+  // Reveal one not-yet-solved pipe. Returns false if nothing to reveal.
+  applyHint: () => boolean;
+}
+
+// Is this dot's path correctly connecting its two endpoints?
+function isPipeSolved(paths: Paths, dot: {key: string; from: [number,number]; to: [number,number]}): boolean {
+  const p = paths[dot.key] || [];
+  if (p.length < 2) return false;
+  const f = p[0], l = p[p.length - 1];
+  return (f[0]===dot.from[0]&&f[1]===dot.from[1]&&l[0]===dot.to[0]&&l[1]===dot.to[1]) ||
+         (f[0]===dot.to[0] &&f[1]===dot.to[1] &&l[0]===dot.from[0]&&l[1]===dot.from[1]);
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
@@ -117,13 +129,42 @@ export const useGameStore = create<GameState>((set, get) => ({
       moves: get().moves + 1,
     });
 
-    if (reachedEnd && isComplete(level, newPaths)) {
-      setTimeout(() => set({isWon: true}), 150);
+    if (reachedEnd) {
+      const complete = isComplete(level, newPaths);
+      sfx(complete ? 'win' : 'connect');
+      if (complete) setTimeout(() => set({isWon: true}), 150);
     }
   },
 
   // Called when finger lifts
   endDraw: () => {
     set({activeKey: null});
+  },
+
+  applyHint: () => {
+    const {level, paths} = get();
+    if (!level) return false;
+
+    // Pick the first pipe that isn't already correctly connected.
+    const target = level.dots.find(d => !isPipeSolved(paths, d));
+    if (!target) return false;
+
+    const solved = solvePipePath(level, target.key);
+    if (!solved) return false;
+
+    // Lay the revealed pipe; clear any other paths it now overlaps.
+    const newPaths: Paths = {...paths};
+    const occupied = new Set(solved.map(([r, c]) => r * level.gridSize + c));
+    for (const [k, p] of Object.entries(newPaths)) {
+      if (k === target.key) continue;
+      if (p.some(([r, c]) => occupied.has(r * level.gridSize + c))) delete newPaths[k];
+    }
+    newPaths[target.key] = solved;
+
+    set({paths: newPaths, activeKey: null, moves: get().moves + 1});
+    const done = isComplete(level, newPaths);
+    sfx(done ? 'win' : 'connect');
+    if (done) setTimeout(() => set({isWon: true}), 150);
+    return true;
   },
 }));

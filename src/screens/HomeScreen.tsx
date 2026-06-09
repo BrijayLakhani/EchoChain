@@ -1,219 +1,217 @@
 import React, {useEffect, useRef} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Animated, StatusBar} from 'react-native';
+import {
+  View, Text, TouchableOpacity, StyleSheet, Animated, StatusBar,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/AppNavigator';
 import {useProgressStore} from '../store/progressStore';
+import {useEconomyStore} from '../store/economyStore';
+import {useDailyStore, dailyLevelId} from '../store/dailyStore';
+import {useSettingsStore, haptic} from '../store/settingsStore';
+import {useProfileStore} from '../store/profileStore';
 import {LEVELS} from '../engine/levels';
-import {Colors, Spacing, Radii, FontSize, FlowColors} from '../theme';
+import {Pastel, FontSize} from '../theme';
+import ResourceBar from '../components/ResourceBar';
+import PressableScale from '../anim/PressableScale';
+import BlobBackground from '../components/BlobBackground';
+import Mascot from '../components/Mascot';
 
 type Props = {navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>};
 
-const DIFF_GROUPS = [
-  {key: 'easy',   label: 'Easy',   count: 5,  color: '#4CAF7D'},
-  {key: 'medium', label: 'Medium', count: 5,  color: '#E8B84B'},
-  {key: 'hard',   label: 'Hard',   count: 5,  color: '#E8772E'},
-  {key: 'expert', label: 'Expert', count: 5,  color: '#D94F3D'},
-];
-
-// Small decorative pipe preview dots
-const DEMO_COLORS = [FlowColors.R, FlowColors.B, FlowColors.G, FlowColors.Y, FlowColors.O, FlowColors.P];
+const LOGO = [Pastel.coral, Pastel.sky, Pastel.mint, Pastel.sun];
+const DOT_SIZE = 52;
+const DOT_GAP  = 12;
 
 export default function HomeScreen({navigation}: Props) {
-  const load      = useProgressStore(s => s.load);
-  const completed = useProgressStore(s => s.completed);
+  const loadProgress = useProgressStore(s => s.load);
+  const completed    = useProgressStore(s => s.completed);
+  const loadEconomy  = useEconomyStore(s => s.load);
+  const loadDaily    = useDailyStore(s => s.load);
+  const loadSettings = useSettingsStore(s => s.load);
+  const streak       = useDailyStore(s => s.streak);
+  const isDoneToday  = useDailyStore(s => s.isDoneToday);
 
-  const fadeIn  = useRef(new Animated.Value(0)).current;
-  const slideUp = useRef(new Animated.Value(20)).current;
+  const fade   = useRef(new Animated.Value(0)).current;
+  const scale  = useRef(new Animated.Value(0.86)).current;
+  const slideY = useRef(new Animated.Value(24)).current;
 
   useEffect(() => {
-    load();
+    loadProgress(); loadEconomy(); loadDaily(); loadSettings();
     Animated.parallel([
-      Animated.timing(fadeIn,  {toValue: 1, duration: 480, useNativeDriver: true}),
-      Animated.timing(slideUp, {toValue: 0, duration: 480, useNativeDriver: true}),
+      Animated.timing(fade,   {toValue: 1, duration: 480, useNativeDriver: true}),
+      Animated.spring(scale,  {toValue: 1, useNativeDriver: true, speed: 13, bounciness: 9}),
+      Animated.timing(slideY, {toValue: 0, duration: 460, useNativeDriver: true}),
     ]).start();
   }, []);
 
   const totalSolved = Object.keys(completed).length;
+  const playLabel =
+    totalSolved === 0            ? 'Play'
+    : totalSolved === LEVELS.length ? 'Play Again'
+    : 'Continue';
 
-  const solvedByDiff = (diff: string) =>
-    LEVELS.filter(l => l.difficulty === diff && completed[l.id] !== undefined).length;
+  const handlePlay = () => {
+    haptic('tap');
+    const firstUnsolved = LEVELS.find(l => !completed[l.id]);
+    if (firstUnsolved) navigation.navigate('Game', {levelId: firstUnsolved.id});
+    else navigation.navigate('LevelSelect');
+  };
+
+  const playDaily = () => {
+    haptic('tap');
+    navigation.navigate('Game', {levelId: dailyLevelId(), daily: true});
+  };
 
   return (
     <SafeAreaView style={styles.root}>
-      <StatusBar barStyle="dark-content" backgroundColor={Colors.bg} />
+      <StatusBar barStyle="dark-content" backgroundColor={Pastel.bg} />
+      <BlobBackground />
 
-      <Animated.View style={[styles.content, {opacity: fadeIn, transform: [{translateY: slideUp}]}]}>
+      {/* ── Top bar: avatar + resources + settings ────── */}
+      <View style={styles.topBar}>
+        <TouchableOpacity style={styles.avatar} activeOpacity={0.85} onPress={() => navigation.navigate('Profile')}>
+          <Text style={styles.avatarFace}>{useProfileStore(s => s.avatar)}</Text>
+        </TouchableOpacity>
+        <ResourceBar
+          onPressLives={() => navigation.navigate('Shop')}
+          onPressCoins={() => navigation.navigate('Shop')}
+        />
+        <View style={{flex: 1}} />
+        <TouchableOpacity style={styles.gear} activeOpacity={0.8} onPress={() => navigation.navigate('Settings')}>
+          <Text style={styles.gearIcon}>⚙</Text>
+        </TouchableOpacity>
+      </View>
 
-        {/* Logo / title area */}
+      <Animated.View style={[styles.inner, {opacity: fade, transform: [{translateY: slideY}]}]}>
+
+        {/* ── Hero ─────────────────────────────────────── */}
         <View style={styles.hero}>
-          {/* Decorative pipe dots */}
-          <View style={styles.demoRow}>
-            {DEMO_COLORS.map((c, i) => (
-              <View key={i} style={[styles.demoDot, {backgroundColor: c}]} />
-            ))}
+          <Animated.View style={[styles.dotGrid, {transform: [{scale}]}]}>
+            {LOGO.map((c, i) => <View key={i} style={[styles.logoDot, {backgroundColor: c}]} />)}
+          </Animated.View>
+          <Text style={styles.title}>FLOW</Text>
+          <Text style={styles.sub}>CONNECT · FILL · SOLVE</Text>
+
+          {/* Friendly host mascots peeking by the logo */}
+          <View style={styles.mascotLeft} pointerEvents="none">
+            <Mascot size={56} color={Pastel.coral} mood="happy" />
           </View>
+          <View style={styles.mascotRight} pointerEvents="none">
+            <Mascot size={46} color={Pastel.sky} mood="wink" />
+          </View>
+        </View>
 
-          <Text style={styles.title}>Flow</Text>
-          <Text style={styles.sub}>Connect the dots. Fill the grid.</Text>
-
-          {totalSolved > 0 && (
-            <Text style={styles.progress}>{totalSolved} of 20 solved</Text>
+        {/* ── Daily challenge card ─────────────────────── */}
+        <TouchableOpacity style={styles.daily} activeOpacity={0.9} onPress={playDaily}>
+          <View style={[styles.dailyIcon, {backgroundColor: isDoneToday() ? Pastel.mint : Pastel.grape}]}>
+            <Text style={styles.dailyEmoji}>{isDoneToday() ? '✓' : '★'}</Text>
+          </View>
+          <View style={{flex: 1}}>
+            <Text style={styles.dailyTitle}>Daily Challenge</Text>
+            <Text style={styles.dailySub}>
+              {isDoneToday() ? 'Done today — come back tomorrow' : 'Solve today’s puzzle for coins'}
+            </Text>
+          </View>
+          {streak > 0 && (
+            <View style={styles.streak}>
+              <Text style={styles.streakFire}>🔥</Text>
+              <Text style={styles.streakNum}>{streak}</Text>
+            </View>
           )}
-        </View>
-
-        {/* Difficulty cards */}
-        <View style={styles.grid}>
-          {DIFF_GROUPS.map(g => {
-            const solved = solvedByDiff(g.key);
-            const pct    = solved / g.count;
-            return (
-              <TouchableOpacity
-                key={g.key}
-                style={styles.diffCard}
-                activeOpacity={0.82}
-                onPress={() => navigation.navigate('LevelSelect', {difficulty: g.key as any})}>
-                <View style={[styles.diffBar, {backgroundColor: g.color + '22'}]}>
-                  <View style={[styles.diffFill, {width: `${pct*100}%` as any, backgroundColor: g.color}]} />
-                </View>
-                <View style={[styles.diffDot, {backgroundColor: g.color}]} />
-                <Text style={[styles.diffLabel, {color: g.color}]}>{g.label}</Text>
-                <Text style={styles.diffCount}>{solved}/{g.count}</Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-
-        {/* Primary CTA */}
-        <TouchableOpacity
-          style={styles.playBtn}
-          activeOpacity={0.85}
-          onPress={() => {
-            const firstUnsolved = LEVELS.find(l => !completed[l.id]);
-            if (firstUnsolved) navigation.navigate('Game', {levelId: firstUnsolved.id});
-            else navigation.navigate('LevelSelect', {});
-          }}>
-          <Text style={styles.playText}>
-            {totalSolved === 0 ? 'Start Playing' : totalSolved === 20 ? 'Play Again' : 'Continue'}
-          </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.allBtn}
-          activeOpacity={0.8}
-          onPress={() => navigation.navigate('LevelSelect', {})}>
-          <Text style={styles.allText}>Browse all puzzles</Text>
-        </TouchableOpacity>
+        {/* ── Buttons ──────────────────────────────────── */}
+        <View style={styles.actions}>
+          <PressableScale style={styles.playBtn} onPress={handlePlay}>
+            <Text style={styles.playTxt}>{playLabel}</Text>
+          </PressableScale>
+
+          <View style={styles.secondaryRow}>
+            <TouchableOpacity
+              style={styles.secondaryBtn}
+              activeOpacity={0.85}
+              onPress={() => { haptic('tap'); navigation.navigate('LevelSelect'); }}>
+              <Text style={styles.secondaryEmoji}>🗺️</Text>
+              <Text style={styles.secondaryTxt}>Levels</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.secondaryBtn}
+              activeOpacity={0.85}
+              onPress={() => { haptic('tap'); navigation.navigate('Shop'); }}>
+              <Text style={styles.secondaryEmoji}>🛍️</Text>
+              <Text style={styles.secondaryTxt}>Shop</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </Animated.View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {flex: 1, backgroundColor: Colors.bg},
-  content: {
-    flex: 1,
-    paddingHorizontal: Spacing.lg,
-    paddingTop: Spacing.xl,
-    justifyContent: 'center',
-  },
+  root: {flex: 1, backgroundColor: Pastel.bg},
 
-  hero: {alignItems: 'center', marginBottom: Spacing.xl},
+  topBar: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    paddingHorizontal: 18, paddingTop: 6, paddingBottom: 2,
+  },
+  avatar: {
+    width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center',
+    backgroundColor: Pastel.grape,
+    shadowColor: Pastel.shadow, shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.12, shadowRadius: 4, elevation: 2,
+  },
+  avatarFace: {fontSize: 20},
+  gear: {
+    width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center',
+    backgroundColor: Pastel.card,
+    shadowColor: Pastel.shadow, shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.07, shadowRadius: 4, elevation: 2,
+  },
+  gearIcon: {fontSize: 18, color: Pastel.inkSoft},
 
-  demoRow: {
-    flexDirection: 'row',
-    gap: 8,
-    marginBottom: Spacing.lg,
-  },
-  demoDot: {
-    width: 16, height: 16,
-    borderRadius: 8,
-  },
+  inner: {flex: 1, paddingHorizontal: 24, paddingTop: 8, paddingBottom: 22},
 
-  title: {
-    fontSize: 52,
-    fontWeight: '900',
-    color: Colors.textPrimary,
-    letterSpacing: -2,
-    marginBottom: 6,
+  hero: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  mascotLeft:  {position: 'absolute', left: -6, top: '34%'},
+  mascotRight: {position: 'absolute', right: 0, top: '46%'},
+  dotGrid: {
+    flexDirection: 'row', flexWrap: 'wrap',
+    width: DOT_SIZE * 2 + DOT_GAP, gap: DOT_GAP, justifyContent: 'center', marginBottom: 26,
   },
-  sub: {
-    fontSize: FontSize.md,
-    color: Colors.textSecondary,
-    letterSpacing: 0.1,
-    marginBottom: 8,
-  },
-  progress: {
-    fontSize: FontSize.sm,
-    color: Colors.textDim,
-    fontWeight: '600',
-  },
+  logoDot: {width: DOT_SIZE, height: DOT_SIZE, borderRadius: DOT_SIZE / 2},
 
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Spacing.sm,
-    marginBottom: Spacing.xl,
-  },
-  diffCard: {
-    width: '47.5%',
-    backgroundColor: Colors.bgCard,
-    borderRadius: Radii.lg,
-    padding: Spacing.md,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    overflow: 'hidden',
-  },
-  diffBar: {
-    position: 'absolute',
-    bottom: 0, left: 0, right: 0,
-    height: 3,
-  },
-  diffFill: {
-    height: 3,
-    borderRadius: 2,
-  },
-  diffDot: {
-    width: 12, height: 12,
-    borderRadius: 6,
-    marginBottom: 8,
-  },
-  diffLabel: {
-    fontSize: FontSize.lg,
-    fontWeight: '800',
-    marginBottom: 2,
-  },
-  diffCount: {
-    fontSize: FontSize.xs,
-    color: Colors.textDim,
-    fontWeight: '500',
-  },
+  title: {fontSize: 66, fontWeight: '900', color: Pastel.ink, letterSpacing: -3, marginBottom: 8},
+  sub: {fontSize: 12, color: Pastel.inkDim, letterSpacing: 2.4, fontWeight: '700', marginBottom: 24},
 
+  progressTrack: {width: 200, height: 8, borderRadius: 4, backgroundColor: Pastel.bgAlt, overflow: 'hidden'},
+  progressFill: {height: '100%', borderRadius: 4, backgroundColor: Pastel.mint},
+  progressTxt: {fontSize: 12, color: Pastel.inkSoft, fontWeight: '700', marginTop: 8},
+
+  daily: {
+    flexDirection: 'row', alignItems: 'center', gap: 14,
+    backgroundColor: Pastel.card, borderRadius: 22, padding: 14, marginBottom: 16,
+    shadowColor: Pastel.shadow, shadowOffset: {width: 0, height: 4}, shadowOpacity: 0.1, shadowRadius: 10, elevation: 3,
+  },
+  dailyIcon: {width: 48, height: 48, borderRadius: 16, alignItems: 'center', justifyContent: 'center'},
+  dailyEmoji: {fontSize: 24, color: '#fff', fontWeight: '800'},
+  dailyTitle: {fontSize: FontSize.md, fontWeight: '800', color: Pastel.ink},
+  dailySub: {fontSize: FontSize.sm, color: Pastel.inkSoft, marginTop: 2},
+  streak: {alignItems: 'center'},
+  streakFire: {fontSize: 18},
+  streakNum: {fontSize: 13, fontWeight: '900', color: Pastel.coral},
+
+  actions: {gap: 12},
   playBtn: {
-    backgroundColor: Colors.textPrimary,
-    paddingVertical: 18,
-    borderRadius: Radii.lg,
-    alignItems: 'center',
-    marginBottom: Spacing.sm,
-    shadowColor: Colors.textPrimary,
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
+    backgroundColor: Pastel.mint, paddingVertical: 18, borderRadius: 18, alignItems: 'center',
+    shadowColor: Pastel.mint, shadowOffset: {width: 0, height: 6}, shadowOpacity: 0.4, shadowRadius: 14, elevation: 6,
   },
-  playText: {
-    fontSize: FontSize.lg,
-    fontWeight: '800',
-    color: Colors.bg,
-    letterSpacing: 0.3,
+  playTxt: {fontSize: 18, fontWeight: '900', color: '#fff', letterSpacing: 0.3},
+  secondaryRow: {flexDirection: 'row', gap: 12},
+  secondaryBtn: {
+    flex: 1, flexDirection: 'row', gap: 8, backgroundColor: Pastel.card,
+    paddingVertical: 15, borderRadius: 16, alignItems: 'center', justifyContent: 'center',
+    shadowColor: Pastel.shadow, shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.07, shadowRadius: 5, elevation: 2,
   },
-
-  allBtn: {
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  allText: {
-    fontSize: FontSize.sm,
-    color: Colors.textDim,
-  },
+  secondaryEmoji: {fontSize: 17},
+  secondaryTxt: {fontSize: FontSize.md, fontWeight: '800', color: Pastel.ink},
 });

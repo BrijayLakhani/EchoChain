@@ -46,3 +46,49 @@ export function isComplete(level: FlowLevel, paths: Paths): boolean {
 export function pathContains(path: Path, row: number, col: number): number {
   return path.findIndex(([r, c]) => r === row && c === col);
 }
+
+// Find the actual drawable path for one color by walking a Hamiltonian path
+// through that color's cells in the solution grid, from `from` to `to`.
+// Region sizes are small (≤ ~14 cells) so DFS is plenty fast.
+export function solvePipePath(level: FlowLevel, key: string): Path | null {
+  const n = level.gridSize;
+  const cells = new Set<number>();
+  for (let r = 0; r < n; r++)
+    for (let c = 0; c < n; c++)
+      if (level.solution[r][c] === key) cells.add(r * n + c);
+
+  const dot = level.dots.find(d => d.key === key);
+  if (!dot) return null;
+  const start = dot.from, goal = dot.to;
+  const total = cells.size;
+  const visited = new Set<number>();
+  const path: Path = [];
+
+  const dfs = (r: number, c: number): boolean => {
+    const id = r * n + c;
+    visited.add(id);
+    path.push([r, c]);
+    if (r === goal[0] && c === goal[1]) {
+      if (path.length === total) return true;
+    } else {
+      for (const [dr, dc] of [[-1,0],[1,0],[0,-1],[0,1]] as const) {
+        const nr = r + dr, nc = c + dc, nid = nr * n + nc;
+        if (cells.has(nid) && !visited.has(nid)) {
+          if (dfs(nr, nc)) return true;
+        }
+      }
+    }
+    visited.delete(id);
+    path.pop();
+    return false;
+  };
+
+  return dfs(start[0], start[1]) ? path : null;
+}
+
+export function calcStars(moves: number, gridSize: number): number {
+  const cells = gridSize * gridSize;
+  if (moves <= Math.ceil(cells * 1.2)) return 3;
+  if (moves <= Math.ceil(cells * 2.2)) return 2;
+  return 1;
+}

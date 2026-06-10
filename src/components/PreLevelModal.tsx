@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Modal} from 'react-native';
+import Animated, {FadeIn, ZoomIn} from 'react-native-reanimated';
 import {Pastel, FontSize} from '../theme';
 
 const TIPS = [
@@ -34,9 +35,9 @@ export default function PreLevelModal({
 }: Props) {
   const tip = React.useMemo(() => TIPS[Math.floor(Math.random() * TIPS.length)], [levelId, visible]);
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
-      <View style={styles.backdrop}>
-        <View style={styles.card}>
+    <Modal visible={visible} transparent animationType="none" onRequestClose={onClose}>
+      <Animated.View entering={FadeIn.duration(120)} style={styles.backdrop}>
+        <Animated.View entering={ZoomIn.springify().damping(16).stiffness(300)} style={styles.card}>
           {/* Accent header band */}
           <View style={[styles.band, {backgroundColor: accent}]}>
             <Text style={styles.bandLabel}>{daily ? 'DAILY CHALLENGE' : `LEVEL ${levelId}`}</Text>
@@ -80,8 +81,8 @@ export default function PreLevelModal({
 
             <Text style={styles.tip}>{tip}</Text>
           </View>
-        </View>
-      </View>
+        </Animated.View>
+      </Animated.View>
     </Modal>
   );
 }

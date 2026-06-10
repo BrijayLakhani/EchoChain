@@ -39,10 +39,11 @@ export default function WinOverlay({
 
   useEffect(() => {
     if (!visible) { stars.forEach(s => (s.value = 0)); return; }
-    const spring = {damping: 7, stiffness: 180};
-    s0.value = withDelay(220, withSpring(1, spring));
-    s1.value = withDelay(350, withSpring(1, spring));
-    s2.value = withDelay(480, withSpring(1, spring));
+    // Snappy: stars land within ~400ms total, never gating the buttons.
+    const spring = {damping: 9, stiffness: 280};
+    s0.value = withDelay(80,  withSpring(1, spring));
+    s1.value = withDelay(160, withSpring(1, spring));
+    s2.value = withDelay(240, withSpring(1, spring));
   }, [visible]);
 
   const st0 = useAnimatedStyle(() => ({transform: [{scale: s0.value}, {rotate: `${(1 - s0.value) * -40}deg`}]}));
@@ -52,13 +53,13 @@ export default function WinOverlay({
 
   return (
     <Modal visible={visible} transparent animationType="none" onRequestClose={onMenu}>
-      <Animated.View entering={FadeIn.duration(220)} style={styles.backdrop}>
-        <Confetti run={visible} count={earned >= 3 ? 48 : 30} />
+      <Animated.View entering={FadeIn.duration(140)} style={styles.backdrop}>
+        <Confetti run={visible} count={earned >= 3 ? 32 : 20} />
         {visible && (
           <LottieView source={require('../assets/win.json')} autoPlay loop={false} style={styles.lottie} />
         )}
 
-        <Animated.View entering={ZoomIn.springify().damping(13).stiffness(160)} style={styles.card}>
+        <Animated.View entering={ZoomIn.springify().damping(15).stiffness(260)} style={styles.card}>
           <View style={styles.mascotWrap}>
             <Mascot size={88}
               color={earned >= 3 ? Pastel.mint : earned === 2 ? Pastel.sky : Pastel.sun}
@@ -78,7 +79,7 @@ export default function WinOverlay({
           <Text style={styles.movesLine}>{moves} moves</Text>
 
           {rewardCoins > 0 && (
-            <Animated.View entering={FadeIn.delay(500)} style={styles.coinPill}>
+            <Animated.View entering={FadeIn.delay(200).duration(140)} style={styles.coinPill}>
               <Text style={styles.coinDot}>●</Text>
               <Text style={styles.coinTxt}>+</Text>
               <AnimatedNumber value={rewardCoins} style={styles.coinTxt} />

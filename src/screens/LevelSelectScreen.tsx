@@ -192,7 +192,7 @@ function PathNode({
 
   return (
     <Animated.View
-      entering={FadeInDown.delay(Math.min(index, 18) * 28).springify().damping(14).stiffness(150)}
+      entering={FadeInDown.delay(Math.min(index, 8) * 14).springify().damping(16).stiffness(260)}
       style={[styles.nodeAbs, {left: x - NODE / 2, top: y - NODE / 2}]}>
 
       {current && <Animated.View style={[styles.ring, {borderColor: color}, ringStyle]} />}

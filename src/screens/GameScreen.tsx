@@ -199,27 +199,35 @@ export default function GameScreen({navigation, route}: Props) {
         </TouchableOpacity>
       </View>
 
-      {/* ── Progress ─────────────────────────────────── */}
+      {/* ── HUD chips + progress ─────────────────────── */}
       <View style={styles.progressSection}>
         <View style={styles.track}>
           <View style={[styles.fill, {width: `${pct * 100}%` as any, backgroundColor: accent}]} />
         </View>
         <View style={styles.metaRow}>
-          <Text style={styles.metaTxt}>{connected} / {level.dots.length} pipes</Text>
-          <Text style={styles.metaTxt}><Text style={styles.metaNum}>{moves}</Text> moves</Text>
+          <View style={styles.chip}>
+            <Text style={styles.chipIcon}>🔗</Text>
+            <Text style={styles.chipTxt}>{connected}/{level.dots.length}</Text>
+          </View>
+          <View style={styles.chip}>
+            <Text style={styles.chipIcon}>👣</Text>
+            <Text style={styles.chipTxt}>{moves}</Text>
+          </View>
         </View>
       </View>
 
-      {/* ── Grid ─────────────────────────────────────── */}
+      {/* ── Framed board ─────────────────────────────── */}
       <View style={styles.gridArea}>
-        <FlowGrid
-          level={level}
-          paths={paths}
-          activeKey={activeKey}
-          onDragStart={handleDragStart}
-          onDragMove={handleDragMove}
-          onDragEnd={handleDragEnd}
-        />
+        <View style={[styles.boardFrame, {borderColor: accent + '33'}]}>
+          <FlowGrid
+            level={level}
+            paths={paths}
+            activeKey={activeKey}
+            onDragStart={handleDragStart}
+            onDragMove={handleDragMove}
+            onDragEnd={handleDragEnd}
+          />
+        </View>
       </View>
 
       {/* ── Hint button ──────────────────────────────── */}
@@ -319,14 +327,23 @@ const styles = StyleSheet.create({
   levelLabel: {fontSize: FontSize.xs, fontWeight: '900', color: Pastel.inkDim, letterSpacing: 2, marginBottom: 2},
   levelName: {fontSize: FontSize.lg, fontWeight: '800', color: Pastel.ink},
 
-  progressSection: {paddingHorizontal: 20, paddingBottom: 12, gap: 8},
+  progressSection: {paddingHorizontal: 20, paddingBottom: 10, gap: 8},
   track: {height: 6, backgroundColor: Pastel.bgAlt, borderRadius: 3, overflow: 'hidden'},
   fill: {height: '100%', borderRadius: 3},
   metaRow: {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'},
-  metaTxt: {fontSize: FontSize.sm, color: Pastel.inkSoft, fontWeight: '600'},
-  metaNum: {fontWeight: '900', color: Pastel.ink},
+  chip: {
+    flexDirection: 'row', alignItems: 'center', gap: 5,
+    backgroundColor: Pastel.card, borderRadius: 999, paddingHorizontal: 11, paddingVertical: 5,
+    shadowColor: Pastel.shadow, shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.08, shadowRadius: 4, elevation: 2,
+  },
+  chipIcon: {fontSize: 12},
+  chipTxt: {fontSize: FontSize.sm, fontWeight: '900', color: Pastel.ink},
 
   gridArea: {flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 12},
+  boardFrame: {
+    backgroundColor: Pastel.card, borderRadius: 24, padding: 10, borderWidth: 3,
+    shadowColor: Pastel.shadow, shadowOffset: {width: 0, height: 6}, shadowOpacity: 0.12, shadowRadius: 14, elevation: 5,
+  },
 
   bottomBar: {alignItems: 'center', paddingBottom: 18, paddingTop: 4},
   hintBtn: {

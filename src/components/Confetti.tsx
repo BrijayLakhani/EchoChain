@@ -14,7 +14,7 @@ export default function Confetti({run, count = 36}: Props) {
     Array.from({length: count}, () => ({
       x: Math.random() * W,
       delay: Math.random() * 250,
-      dur: 1600 + Math.random() * 1400,
+      dur: 1100 + Math.random() * 800,
       drift: (Math.random() - 0.5) * 140,
       size: 7 + Math.random() * 8,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],

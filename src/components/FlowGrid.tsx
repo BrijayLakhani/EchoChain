@@ -1,7 +1,9 @@
-import React, {useRef, useMemo, useEffect} from 'react';
-import {View, Text, StyleSheet, Dimensions, PanResponder, Animated} from 'react-native';
+import React, {useMemo, useRef, useEffect} from 'react';
+import {View, Text, StyleSheet, Dimensions, Animated} from 'react-native';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import {useSharedValue, runOnJS} from 'react-native-reanimated';
 import {FlowLevel} from '../engine/types';
-import {Paths, getPathColor, isEndpoint, pathContains} from '../engine/flowEngine';
+import {Paths} from '../engine/flowEngine';
 import {FlowColors, Colors} from '../theme';
 import {useSettingsStore} from '../store/settingsStore';
 
@@ -36,32 +38,50 @@ interface CellInfo {
   active: boolean;
 }
 
+// Single pass over all paths (O(total path cells)) instead of per-cell scans —
+// keeps redraws cheap even while dragging fast on a 9×9 board.
 function buildGrid(level: FlowLevel, paths: Paths, activeKey: string | null): CellInfo[][] {
   const N = level.gridSize;
-  return Array.from({length: N}, (_, r) =>
-    Array.from({length: N}, (_, c) => {
-      const endColor  = isEndpoint(level, r, c);
-      const pathColor = getPathColor(paths, r, c);
-      if (!pathColor) {
-        return {pathColor: null, endColor, top:false, bottom:false, left:false, right:false, active:false};
-      }
-      const path = paths[pathColor] || [];
-      const idx  = pathContains(path, r, c);
-      const prev = idx > 0                        ? path[idx - 1] : null;
-      const next = idx >= 0 && idx < path.length - 1 ? path[idx + 1] : null;
-      const has  = (p: typeof prev, dr: number, dc: number) =>
-        !!(p && p[0] === r + dr && p[1] === c + dc);
-      return {
-        pathColor,
-        endColor,
-        top:    has(prev,-1,0) || has(next,-1,0),
-        bottom: has(prev, 1,0) || has(next, 1,0),
-        left:   has(prev, 0,-1) || has(next, 0,-1),
-        right:  has(prev, 0, 1) || has(next, 0, 1),
-        active: pathColor === activeKey,
-      };
-    })
+
+  // endpoint lookup
+  const endAt: (string | null)[][] = Array.from({length: N}, () => Array(N).fill(null));
+  for (const dot of level.dots) {
+    endAt[dot.from[0]][dot.from[1]] = dot.key;
+    endAt[dot.to[0]][dot.to[1]]     = dot.key;
+  }
+
+  // path occupancy + neighbour links in one sweep
+  const info: CellInfo[][] = Array.from({length: N}, (_, r) =>
+    Array.from({length: N}, (_, c) => ({
+      pathColor: null, endColor: endAt[r][c],
+      top: false, bottom: false, left: false, right: false, active: false,
+    })),
   );
+
+  for (const [key, path] of Object.entries(paths)) {
+    const active = key === activeKey;
+    for (let i = 0; i < path.length; i++) {
+      const [r, c] = path[i];
+      const cell = info[r][c];
+      cell.pathColor = key;
+      cell.active = active;
+      if (i > 0) {
+        const [pr, pc] = path[i - 1];
+        if (pr === r - 1) cell.top = true;
+        else if (pr === r + 1) cell.bottom = true;
+        else if (pc === c - 1) cell.left = true;
+        else if (pc === c + 1) cell.right = true;
+      }
+      if (i < path.length - 1) {
+        const [nr, nc] = path[i + 1];
+        if (nr === r - 1) cell.top = true;
+        else if (nr === r + 1) cell.bottom = true;
+        else if (nc === c - 1) cell.left = true;
+        else if (nc === c + 1) cell.right = true;
+      }
+    }
+  }
+  return info;
 }
 
 // ── Cell — only re-renders when its own data changes ─────────────────────────
@@ -69,8 +89,8 @@ const Cell = React.memo(
   function Cell({info, sz, cb, pulse}: {info: CellInfo; sz: number; cb: boolean; pulse: Animated.Value}) {
     const {pathColor, endColor, top, bottom, left, right, active} = info;
     const color = pathColor ? getColor(pathColor) : null;
-    const PIPE  = Math.round(sz * 0.44);   // thicker pipes
-    const DOT   = Math.round(sz * 0.66);   // larger endpoint dots
+    const PIPE  = Math.round(sz * 0.44);
+    const DOT   = Math.round(sz * 0.66);
     const H     = Math.round(sz / 2);
 
     return (
@@ -134,91 +154,61 @@ export default function FlowGrid({level, paths, activeKey, onDragStart, onDragMo
     return () => loop.stop();
   }, []);
 
-  // ── Refs — the PanResponder reads these so it's always up-to-date
-  //    even though the PanResponder object itself is created only once.
-  const stepRef  = useRef(step);  stepRef.current  = step;
-  const nRef     = useRef(N);     nRef.current     = N;
-  const startRef = useRef(onDragStart); startRef.current = onDragStart;
-  const moveRef  = useRef(onDragMove);  moveRef.current  = onDragMove;
-  const endRef   = useRef(onDragEnd);   endRef.current   = onDragEnd;
+  // ── Drag handling on the UI thread (gesture-handler worklets).
+  // Touch coords are view-relative, and JS is only invoked when the finger
+  // crosses into a NEW cell — not on every raw move event. This is what makes
+  // the draw feel glassy instead of janky.
+  const lastCell = useSharedValue(-1);
 
-  // Absolute screen position of this grid view, set via measure() on layout.
-  const gridRef = useRef<View>(null);
-  const gx      = useRef(0);
-  const gy      = useRef(0);
-  const lastKey = useRef('');
+  const pan = useMemo(() => Gesture.Pan()
+    .minDistance(0)
+    .maxPointers(1)
+    .onBegin(e => {
+      'worklet';
+      const col = Math.floor(e.x / step);
+      const row = Math.floor(e.y / step);
+      if (row >= 0 && row < N && col >= 0 && col < N) {
+        lastCell.value = row * 64 + col;
+        runOnJS(onDragStart)(row, col);
+      } else {
+        lastCell.value = -1;
+      }
+    })
+    .onUpdate(e => {
+      'worklet';
+      const col = Math.floor(e.x / step);
+      const row = Math.floor(e.y / step);
+      if (row < 0 || row >= N || col < 0 || col >= N) return;
+      const key = row * 64 + col;
+      if (key === lastCell.value) return;
+      lastCell.value = key;
+      runOnJS(onDragMove)(row, col);
+    })
+    .onFinalize(() => {
+      'worklet';
+      lastCell.value = -1;
+      runOnJS(onDragEnd)();
+    }), [step, N, onDragStart, onDragMove, onDragEnd]);
 
-  // Convert absolute screen coord → "row,col" string. Returns null if outside grid.
-  // Reads only from refs — safe to call from a stale closure inside PanResponder.
-  function toKey(absX: number, absY: number): string | null {
-    const col = Math.floor((absX - gx.current) / stepRef.current);
-    const row = Math.floor((absY - gy.current) / stepRef.current);
-    if (col >= 0 && col < nRef.current && row >= 0 && row < nRef.current) {
-      return `${row},${col}`;
-    }
-    return null;
-  }
-
-  // PanResponder — created once, uses only refs internally.
-  const pan = useRef(PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onMoveShouldSetPanResponder:  () => true,
-
-    onPanResponderGrant: (evt) => {
-      const {pageX, pageY} = evt.nativeEvent;
-      lastKey.current = '';
-      const key = toKey(pageX, pageY);
-      if (!key) return;
-      lastKey.current = key;
-      const [r, c] = key.split(',').map(Number);
-      startRef.current(r, c);
-    },
-
-    onPanResponderMove: (_evt, gs) => {
-      // gs.moveX/Y = current absolute finger position on screen
-      const key = toKey(gs.moveX, gs.moveY);
-      if (!key || key === lastKey.current) return;
-      lastKey.current = key;
-      const [r, c] = key.split(',').map(Number);
-      moveRef.current(r, c);
-    },
-
-    onPanResponderRelease:   () => { lastKey.current = ''; endRef.current(); },
-    onPanResponderTerminate: () => { lastKey.current = ''; endRef.current(); },
-  })).current;
-
-  // Measure the grid's absolute screen position after it lays out.
-  function onLayout() {
-    gridRef.current?.measureInWindow((px, py) => {
-      gx.current = px;
-      gy.current = py;
-    });
-  }
-
-  // Precompute display data — only recomputed when paths or activeKey change.
-  // Each cell gets a simple object; Cell's custom memo comparator avoids
-  // re-rendering cells whose data hasn't changed.
   const grid = useMemo(
     () => buildGrid(level, paths, activeKey),
-    [level, paths, activeKey]
+    [level, paths, activeKey],
   );
 
   const gridW = N * sz + (N - 1) * GAP;
 
   return (
-    <View
-      ref={gridRef}
-      onLayout={onLayout}
-      {...pan.panHandlers}
-      style={[s.grid, {width: gridW}]}>
-      {grid.map((row, r) => (
-        <View key={r} style={s.row}>
-          {row.map((info, c) => (
-            <Cell key={c} info={info} sz={sz} cb={cb} pulse={pulse} />
-          ))}
-        </View>
-      ))}
-    </View>
+    <GestureDetector gesture={pan}>
+      <View style={[s.grid, {width: gridW}]}>
+        {grid.map((row, r) => (
+          <View key={r} style={s.row}>
+            {row.map((info, c) => (
+              <Cell key={c} info={info} sz={sz} cb={cb} pulse={pulse} />
+            ))}
+          </View>
+        ))}
+      </View>
+    </GestureDetector>
   );
 }
 

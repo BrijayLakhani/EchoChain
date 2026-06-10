@@ -11,7 +11,7 @@ type Props = {value: number; style?: StyleProp<TextStyle>; duration?: number};
 // Smoothly counts up/down to `value` on the UI thread — the polished coin/gem
 // tick you see in real games. Uses an un-editable TextInput because Reanimated
 // can animate its `text` prop directly (Text children can't be animated).
-export default function AnimatedNumber({value, style, duration = 550}: Props) {
+export default function AnimatedNumber({value, style, duration = 320}: Props) {
   const sv = useSharedValue(value);
 
   useEffect(() => {

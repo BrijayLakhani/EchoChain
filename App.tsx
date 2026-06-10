@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AppNavigator, {RootStackParamList} from './src/navigation/AppNavigator';
 import RewardedAdModal from './src/components/RewardedAdModal';
@@ -21,7 +22,7 @@ export default function App() {
   useEffect(() => {
     initSfx();
     (async () => {
-      const minSplash = new Promise<void>(res => setTimeout(() => res(), 1100));
+      const minSplash = new Promise<void>(res => setTimeout(() => res(), 300));
       await Promise.all([loadConsent(), loadProfile(), loadEconomy(), loadIap(), minSplash]);
       const accepted = useConsentStore.getState().accepted;
       setRoute(accepted ? 'Home' : 'Consent');
@@ -32,11 +33,13 @@ export default function App() {
   if (!route) return <LoadingScreen />; // branded splash while stores hydrate
 
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <AppNavigator initialRoute={route} />
-      </NavigationContainer>
-      <RewardedAdModal />
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <AppNavigator initialRoute={route} />
+        </NavigationContainer>
+        <RewardedAdModal />
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }

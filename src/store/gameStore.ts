@@ -132,7 +132,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     if (reachedEnd) {
       const complete = isComplete(level, newPaths);
       sfx(complete ? 'win' : 'connect');
-      if (complete) setTimeout(() => set({isWon: true}), 150);
+      if (complete) setTimeout(() => set({isWon: true}), 60);
     }
   },
 
@@ -164,7 +164,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     set({paths: newPaths, activeKey: null, moves: get().moves + 1});
     const done = isComplete(level, newPaths);
     sfx(done ? 'win' : 'connect');
-    if (done) setTimeout(() => set({isWon: true}), 150);
+    if (done) setTimeout(() => set({isWon: true}), 60);
     return true;
   },
 }));

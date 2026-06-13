@@ -14,6 +14,8 @@ import {haptic} from '../store/settingsStore';
 import {sfx} from '../audio/sfx';
 import {analytics} from '../analytics';
 import {showRewardedAd} from '../ads/adStore';
+import {isOnline} from '../utils/net';
+import {toast} from '../store/toastStore';
 import {calcStars} from '../engine/flowEngine';
 import FlowGrid from '../components/FlowGrid';
 import WinOverlay from '../components/WinOverlay';
@@ -153,6 +155,8 @@ export default function GameScreen({navigation, route}: Props) {
     haptic('error');
     // Out of hints → offer a rewarded ad, but only if the daily ad cap allows.
     if (!canWatchAd()) { navigation.navigate('Shop'); return; }
+    // Ads need a connection — the game itself is offline, so check first.
+    if (!(await isOnline())) { toast('No internet — connect to watch ads', 'error'); return; }
     analytics.track('ad_started', {placement: 'hint'});
     const earned = await showRewardedAd();
     if (earned) {

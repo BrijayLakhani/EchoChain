@@ -16,6 +16,8 @@ import {haptic} from '../store/settingsStore';
 import {sfx} from '../audio/sfx';
 import {analytics} from '../analytics';
 import {showRewardedAd} from '../ads/adStore';
+import {isOnline} from '../utils/net';
+import {toast} from '../store/toastStore';
 
 type Props = {navigation: NativeStackNavigationProp<RootStackParamList, 'Shop'>};
 
@@ -63,6 +65,7 @@ export default function ShopScreen({navigation}: Props) {
   };
   const onWatchAd = async () => {
     if (!canWatchAd) { fail(); return; }
+    if (!(await isOnline())) { fail(); toast('No internet — connect to watch ads', 'error'); return; }
     analytics.track('ad_started', {placement: 'shop_coins'});
     const earned = await showRewardedAd();
     if (earned) {

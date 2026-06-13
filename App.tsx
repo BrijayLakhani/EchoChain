@@ -4,6 +4,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AppNavigator, {RootStackParamList} from './src/navigation/AppNavigator';
 import RewardedAdModal from './src/components/RewardedAdModal';
+import Toast from './src/components/Toast';
 import {useConsentStore} from './src/store/consentStore';
 import {useProfileStore} from './src/store/profileStore';
 import {useIapStore} from './src/store/iapStore';
@@ -39,6 +40,7 @@ export default function App() {
           <AppNavigator initialRoute={route} />
         </NavigationContainer>
         <RewardedAdModal />
+        <Toast />
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

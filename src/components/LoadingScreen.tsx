@@ -12,7 +12,7 @@ export default function LoadingScreen() {
           <View key={i} style={[styles.dot, {backgroundColor: c}]} />
         ))}
       </View>
-      <Text style={styles.title}>FLOW</Text>
+      <Text style={styles.title}>Dotwise</Text>
       <LottieView
         source={require('../assets/loading.json')}
         autoPlay
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
   root: {flex: 1, backgroundColor: Pastel.bg, alignItems: 'center', justifyContent: 'center'},
   logo: {flexDirection: 'row', flexWrap: 'wrap', width: 84, gap: 8, justifyContent: 'center', marginBottom: 18},
   dot: {width: 38, height: 38, borderRadius: 19},
-  title: {fontSize: 48, fontWeight: '900', color: Pastel.ink, letterSpacing: -2, marginBottom: 6},
+  title: {fontSize: 40, fontWeight: '900', color: Pastel.ink, letterSpacing: -1.5, marginBottom: 6},
   lottie: {width: 120, height: 90},
 });

@@ -68,7 +68,7 @@ export default function PauseOverlay({visible, onResume, onRestart, onExit}: Pro
               <TouchableOpacity
                 style={[styles.btn, styles.btnGhost]}
                 activeOpacity={0.88}
-                onPress={() => Linking.openURL('mailto:yatrawithmaps@gmail.com?subject=FLOW%20Support')}>
+                onPress={() => Linking.openURL('mailto:yatrawithmaps@gmail.com?subject=Dotwise%20Support')}>
                 <Text style={[styles.btnTxt, {color: Pastel.ink}]}>Contact Support</Text>
               </TouchableOpacity>
             </View>

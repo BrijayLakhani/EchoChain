@@ -105,7 +105,7 @@ export default function SettingsScreen({navigation}: Props) {
           onPress={resetProgress}
         />
 
-        <Text style={styles.about}>FLOW · Connect · Fill · Solve{'\n'}Made with care.</Text>
+        <Text style={styles.about}>Dotwise · Connect · Fill · Solve{'\n'}Made with care.</Text>
       </ScrollView>
     </View>
   );

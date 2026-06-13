@@ -79,7 +79,7 @@ export default function HomeScreen({navigation}: Props) {
             <View style={styles.dotGrid}>
               {LOGO.map((c, i) => <View key={i} style={[styles.logoDot, {backgroundColor: c}]} />)}
             </View>
-            <Text style={styles.title}>FLOW</Text>
+            <Text style={styles.title}>Dotwise</Text>
             <Text style={styles.sub}>CONNECT · FILL · SOLVE</Text>
           </Animated.View>
 
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   dotGrid: {flexDirection: 'row', flexWrap: 'wrap', width: DOT * 2 + 10, gap: 10, justifyContent: 'center', marginBottom: 14},
   logoDot: {width: DOT, height: DOT, borderRadius: DOT / 2},
-  title: {fontSize: 46, fontWeight: '900', color: Pastel.ink, letterSpacing: -2},
+  title: {fontSize: 40, fontWeight: '900', color: Pastel.ink, letterSpacing: -1.5},
   sub: {fontSize: 10, color: Pastel.inkDim, letterSpacing: 2.2, fontWeight: '800', marginTop: 4},
 
   mascotLeft:  {position: 'absolute', left: 2, top: '22%'},

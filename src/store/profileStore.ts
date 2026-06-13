@@ -20,9 +20,9 @@ function uuidv4(): string {
   });
 }
 
-// Short, human-friendly player tag derived from the uuid, e.g. "FLOW-9F3A".
+// Short, human-friendly player tag derived from the uuid, e.g. "DOT-9F3A12".
 function tagFrom(id: string): string {
-  return 'FLOW-' + id.replace(/-/g, '').slice(0, 6).toUpperCase();
+  return 'DOT-' + id.replace(/-/g, '').slice(0, 6).toUpperCase();
 }
 
 interface ProfileState {

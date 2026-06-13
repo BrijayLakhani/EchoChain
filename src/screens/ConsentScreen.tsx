@@ -29,11 +29,11 @@ export default function ConsentScreen({navigation}: Props) {
         <View style={styles.logoRow}>
           {LOGO.map((c, i) => <View key={i} style={[styles.dot, {backgroundColor: c}]} />)}
         </View>
-        <Text style={styles.title}>Welcome to FLOW</Text>
+        <Text style={styles.title}>Welcome to Dotwise</Text>
         <Text style={styles.sub}>Before you play, a quick note on your privacy.</Text>
 
         <View style={styles.card}>
-          <Bullet>FLOW works offline. No account, no name or email needed.</Bullet>
+          <Bullet>Dotwise works offline. No account, no name or email needed.</Bullet>
           <Bullet>Your progress is stored only on this device.</Bullet>
           <Bullet>Optional ads can be watched for hints or coins.</Bullet>
         </View>

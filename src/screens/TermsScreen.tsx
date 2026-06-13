@@ -23,7 +23,7 @@ export default function TermsScreen({navigation}: Props) {
         <Text style={styles.updated}>Last updated: 5 June 2026</Text>
 
         <P h>1. Acceptance</P>
-        <P>By installing or using FLOW (“the app”) you agree to these Terms. If you do not agree,
+        <P>By installing or using Dotwise (“the app”) you agree to these Terms. If you do not agree,
           please do not use the app.</P>
 
         <P h>2. License</P>

@@ -23,7 +23,7 @@ export default function PrivacyPolicyScreen({navigation}: Props) {
         <Text style={styles.updated}>Last updated: 5 June 2026</Text>
 
         <P h>1. Overview</P>
-        <P>FLOW (“the app”, “we”) is an offline puzzle game. We designed it to collect as little
+        <P>Dotwise (“the app”, “we”) is an offline puzzle game. We designed it to collect as little
           data as possible. The app does not require an account and does not ask for your name,
           email, phone number, or location.</P>
 

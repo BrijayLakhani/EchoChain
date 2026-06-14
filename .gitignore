@@ -97,3 +97,6 @@ android/keystore.properties
 android/app/dotwise-release.keystore
 *.keystore
 !android/app/debug.keystore
+
+# Firebase config (keep private on public repo)
+android/app/google-services.json

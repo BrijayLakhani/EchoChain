@@ -5,6 +5,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AppNavigator, {RootStackParamList} from './src/navigation/AppNavigator';
 import RewardedAdModal from './src/components/RewardedAdModal';
 import Toast from './src/components/Toast';
+import ErrorBoundary from './src/components/ErrorBoundary';
 import {useConsentStore} from './src/store/consentStore';
 import {useProfileStore} from './src/store/profileStore';
 import {useIapStore} from './src/store/iapStore';
@@ -34,6 +35,7 @@ export default function App() {
   if (!route) return <LoadingScreen />; // branded splash while stores hydrate
 
   return (
+    <ErrorBoundary>
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaProvider>
         <NavigationContainer>
@@ -43,5 +45,6 @@ export default function App() {
         <Toast />
       </SafeAreaProvider>
     </GestureHandlerRootView>
+    </ErrorBoundary>
   );
 }

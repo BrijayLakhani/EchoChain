@@ -1,7 +1,7 @@
 import {create} from 'zustand';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEconomyStore} from './economyStore';
 import {analytics} from '../analytics';
+import {getSecure, setSecure} from '../utils/secureStore';
 
 // ── In-app purchase catalog ─────────────────────────────────────
 // Hard currency (gems) + consumables + the non-consumable "remove ads".
@@ -49,7 +49,7 @@ interface IapState {
 export const useIapStore = create<IapState>((set, get) => {
   const persist = () => {
     const {owned, removeAds} = get();
-    AsyncStorage.setItem(KEY, JSON.stringify({owned, removeAds}));
+    setSecure(KEY, {owned, removeAds});
   };
 
   return {
@@ -60,8 +60,8 @@ export const useIapStore = create<IapState>((set, get) => {
 
     load: async () => {
       try {
-        const raw = await AsyncStorage.getItem(KEY);
-        if (raw) { const p = JSON.parse(raw); set({owned: p.owned ?? [], removeAds: p.removeAds ?? false, loaded: true}); }
+        const p = await getSecure<{owned: string[]; removeAds: boolean}>(KEY);
+        if (p) set({owned: p.owned ?? [], removeAds: p.removeAds ?? false, loaded: true});
         else set({loaded: true});
       } catch { set({loaded: true}); }
     },

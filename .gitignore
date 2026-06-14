@@ -91,3 +91,9 @@ android/replay_pid*.log
 # Debug screenshots & UI dumps (session artifacts)
 /*.png
 /u.xml
+
+# Release signing secrets — NEVER commit these
+android/keystore.properties
+android/app/dotwise-release.keystore
+*.keystore
+!android/app/debug.keystore

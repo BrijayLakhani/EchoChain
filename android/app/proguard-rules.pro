@@ -1,10 +1,28 @@
 # Add project specific ProGuard rules here.
-# By default, the flags in this file are appended to flags specified
-# in /usr/local/Cellar/android-sdk/24.3.3/tools/proguard/proguard-android.txt
-# You can edit the include path and order by changing the proguardFiles
-# directive in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Appended to the default proguard-android.txt (see build.gradle proguardFiles).
 
-# Add any project specific keep options here:
+# ── React Native core / Hermes ────────────────────────────────────────────
+-keep,allowobfuscation @com.facebook.proguard.annotations.DoNotStrip class *
+-keepclassmembers class * { @com.facebook.proguard.annotations.DoNotStrip *; }
+-keep class com.facebook.hermes.** { *; }
+-keep class com.facebook.jni.** { *; }
+-dontwarn com.facebook.react.**
+
+# ── Reanimated / Worklets ─────────────────────────────────────────────────
+-keep class com.swmansion.reanimated.** { *; }
+-keep class com.swmansion.worklets.** { *; }
+
+# ── Gesture Handler ───────────────────────────────────────────────────────
+-keep class com.swmansion.gesturehandler.** { *; }
+
+# ── react-native-svg ──────────────────────────────────────────────────────
+-keep public class com.horcrux.svg.** { *; }
+
+# ── Lottie ────────────────────────────────────────────────────────────────
+-keep class com.airbnb.lottie.** { *; }
+-dontwarn com.airbnb.lottie.**
+
+# ── Keep JS-callable native modules & view managers generally ─────────────
+-keep class * extends com.facebook.react.bridge.NativeModule { *; }
+-keep class * extends com.facebook.react.uimanager.ViewManager { *; }
+-keepclassmembers class *  { @com.facebook.react.uimanager.annotations.ReactProp <methods>; }

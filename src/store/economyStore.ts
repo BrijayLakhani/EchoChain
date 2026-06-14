@@ -1,6 +1,6 @@
 import {create} from 'zustand';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {todayKey} from './dailyStore';
+import {getSecure, setSecure} from '../utils/secureStore';
 
 // ── Economy tuning ──────────────────────────────────────────────
 export const LIVES_MAX        = 5;
@@ -97,8 +97,7 @@ function regen(p: Persisted): Persisted {
 export const useEconomyStore = create<EconomyState>((set, get) => {
   const persist = () => {
     const {lives, coins, gems, hints, lastRefillAt, adDay, adsWatchedToday, freeClaimDay} = get();
-    AsyncStorage.setItem(KEY, JSON.stringify(
-      {lives, coins, gems, hints, lastRefillAt, adDay, adsWatchedToday, freeClaimDay}));
+    setSecure(KEY, {lives, coins, gems, hints, lastRefillAt, adDay, adsWatchedToday, freeClaimDay});
   };
 
   return {
@@ -107,8 +106,8 @@ export const useEconomyStore = create<EconomyState>((set, get) => {
 
     load: async () => {
       try {
-        const raw = await AsyncStorage.getItem(KEY);
-        const base: Persisted = raw ? {...freshPersisted(), ...JSON.parse(raw)} : freshPersisted();
+        const saved = await getSecure<Persisted>(KEY);
+        const base: Persisted = saved ? {...freshPersisted(), ...saved} : freshPersisted();
         set({...regen(rollDay(base)), loaded: true});
       } catch {
         set({loaded: true});

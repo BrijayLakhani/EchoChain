@@ -104,7 +104,7 @@ export default function LevelSelectScreen({navigation}: Props) {
         </Pressable>
         <View style={styles.headerCenter}>
           <Text style={styles.headerTitle}>Journey</Text>
-          <Text style={styles.headerSub}>{solvedCount} / {LEVELS.length} solved</Text>
+          <Text style={styles.headerSub}>{solvedCount} solved</Text>
         </View>
         <View style={{width: 36}} />
       </View>

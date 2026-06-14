@@ -171,25 +171,30 @@ TITLES = [
  'Crosswind','Braid','Snarl','Labyrinth','Long Haul','Gridlock','Tight Squeeze','Overpass','Junction','Crossover',
  'Deep Dive','Web','Mesh','Puzzle Box','Entangled','Crisscross','Convolution','The Gauntlet','Serpentine','Big Knot',
  'Floodgate','Conduit','Plexus','Quagmire','The Weaver','Gordian','Pipework','Grand Maze','Master Flow','Flow Master',
+ 'Fresh Start','Loop Back','Twist','Hairpin','Cross Lane','Ravel','Threadwork','Backtrack','Snake Pit','Tenfold',
+ 'Crossfire','Meander','Filigree','Pretzel','Long Game','Deadlock','Squeeze Play','Flyover','Interchange','Tangent',
+ 'Abyss','Cobweb','Network','Brainbox','Twisted','Hatchwork','Spaghetti','The Trial','Sidewinder','Hard Knot',
+ 'Sluice','Channel','Nexus','Mire','Loomwork','Tangle Knot','Plumbline','Great Maze','Pipe Sage','Grandmaster',
+ 'Final Bend','Twin Coils','Vortex','Riddle','Crosshatch','Snarl Up','Maelstrom','Endgame','The Summit','Dotwise',
 ]
 
 def difficulty_for(level):
-    if level<=10: return 'easy'
-    if level<=22: return 'medium'
-    if level<=38: return 'hard'
+    if level<=15: return 'easy'
+    if level<=40: return 'medium'
+    if level<=75: return 'hard'
     return 'expert'
 
 def grid_for(level):
-    if level<=10: return 5
-    if level<=20: return 6
-    if level<=30: return 7
-    if level<=40: return 8
+    if level<=10:  return 5
+    if level<=25:  return 6
+    if level<=45:  return 7
+    if level<=70:  return 8
     return 9
 
 def colors_for(level, n):
-    # scale colours up within each tier
+    # scale colours up as you progress, capped by palette size
     base = {5:3, 6:4, 7:5, 8:6, 9:7}[n]
-    bump = (level-1) % 10 // 4   # 0..2 within tier
+    bump = ((level-1) % 25) // 9   # 0..2 within each grid tier
     return min(len(KEYS), base + bump)
 
 def emit(level):
@@ -205,10 +210,10 @@ def emit(level):
             f"    dots: [\n{dl}\n    ],\n    solution: [\n{rows}\n    ],\n  }},")
 
 def main():
-    blocks=[emit(l) for l in range(1,51)]
+    blocks=[emit(l) for l in range(1,101)]
     out="import {FlowLevel} from './types';\n\nexport const LEVELS: FlowLevel[] = [\n\n"+"\n\n".join(blocks)+"\n];\n"
     open(r'C:\Users\lakha\EchoChain\src\engine\levels.ts','w',encoding='utf-8').write(out)
-    print('wrote 50 levels')
+    print(f'wrote {len(blocks)} levels')
 
 if __name__=='__main__':
     main()

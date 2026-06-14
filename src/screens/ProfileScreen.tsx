@@ -11,7 +11,6 @@ import {useProfileStore, AVATAR_CHOICES} from '../store/profileStore';
 import {useProgressStore} from '../store/progressStore';
 import {useDailyStore} from '../store/dailyStore';
 import {useEconomyStore} from '../store/economyStore';
-import {LEVELS} from '../engine/levels';
 import {haptic} from '../store/settingsStore';
 import GameButton from '../anim/GameButton';
 import Mascot from '../components/Mascot';
@@ -87,7 +86,7 @@ export default function ProfileScreen({navigation}: Props) {
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         {/* Stats */}
         <Animated.View entering={FadeInDown.duration(180)} style={styles.statsRow}>
-          <Stat label="Solved" value={`${solved}/${LEVELS.length}`} color={Pastel.mint} icon="✅" />
+          <Stat label="Solved" value={`${solved}`} color={Pastel.mint} icon="✅" />
           <Stat label="Stars" value={`${stars}`} color={Pastel.sun} icon="⭐" />
           <Stat label="Streak" value={`${streak}`} color={Pastel.coral} icon="🔥" />
         </Animated.View>

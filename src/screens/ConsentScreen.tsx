@@ -1,21 +1,40 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Switch, StatusBar} from 'react-native';
+import React from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, ScrollView, StatusBar, Linking} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/AppNavigator';
-import {Pastel, FontSize} from '../theme';
 import {useConsentStore} from '../store/consentStore';
 import {analytics} from '../analytics';
 
 type Props = {navigation: NativeStackNavigationProp<RootStackParamList, 'Consent'>};
 
-const LOGO = [Pastel.coral, Pastel.sky, Pastel.mint, Pastel.sun];
+// IAB-TCF / CMP-style privacy information gate (modelled on standard consent
+// forms shown by ad-supported apps). "Accept all" grants analytics + personalised
+// ads; "Manage Settings" proceeds with essential only.
+//
+// NOTE: For real EEA/GDPR ad compliance once AdMob is live, Google's User
+// Messaging Platform (UMP) SDK should render & store the official TCF consent
+// string. This screen provides the same look and a clear opt-in meanwhile.
+
+const PURPOSES = [
+  'Store and/or access information on a device',
+  'Personalised advertising and content, advertising and content measurement, audience research and services development',
+];
+const SPECIAL_PURPOSES = [
+  'Ensure security, prevent and detect fraud, and fix errors',
+  'Deliver and present advertising and content',
+  'Save and communicate privacy choices',
+  'Personalised advertising and content, advertising and content measurement, audience research and services development',
+];
+const SPECIAL_FEATURES = [
+  'Precise geolocation data, and identification through device scanning',
+];
+const NON_IAB = ['Marketing', 'Functional', 'Essential'];
 
 export default function ConsentScreen({navigation}: Props) {
   const accept = useConsentStore(s => s.accept);
-  const [analyticsOn, setAnalyticsOn] = useState(true);
 
-  const onAgree = () => {
+  const finish = (analyticsOn: boolean) => {
     accept(analyticsOn);
     analytics.setEnabled(analyticsOn);
     analytics.track('consent_set', {analytics: analyticsOn});
@@ -23,78 +42,89 @@ export default function ConsentScreen({navigation}: Props) {
   };
 
   return (
-    <SafeAreaView style={styles.root}>
-      <StatusBar barStyle="dark-content" backgroundColor={Pastel.bg} />
-      <View style={styles.body}>
-        <View style={styles.logoRow}>
-          {LOGO.map((c, i) => <View key={i} style={[styles.dot, {backgroundColor: c}]} />)}
-        </View>
-        <Text style={styles.title}>Welcome to Dotwise</Text>
-        <Text style={styles.sub}>Before you play, a quick note on your privacy.</Text>
+    <View style={styles.root}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <SafeAreaView style={{flex: 1}} edges={['top', 'left', 'right']}>
+        <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+          <Text style={styles.h1}>Privacy Information</Text>
 
-        <View style={styles.card}>
-          <Bullet>Dotwise works offline. No account, no name or email needed.</Bullet>
-          <Bullet>Your progress is stored only on this device.</Bullet>
-          <Bullet>Optional ads can be watched for hints or coins.</Bullet>
-        </View>
+          <Text style={styles.body}>
+            We and our advertising partners use technologies (e.g. device identifiers and
+            cookies) to store and/or access information on your device in order to process
+            personal data such as advertising identifiers or usage data. You may consent to
+            the processing of your personal data for the purposes listed below. Alternatively
+            you can set your preferences or refuse to consent. Your privacy choices apply only
+            to this app. Some partners may process your personal data based on their legitimate
+            business interest and do not ask for your consent. You can change your privacy
+            settings or withdraw your consent at any time from Settings → Privacy.
+          </Text>
 
-        <View style={styles.toggleRow}>
-          <View style={{flex: 1}}>
-            <Text style={styles.toggleLabel}>Allow anonymous analytics</Text>
-            <Text style={styles.toggleSub}>Helps us improve the game. You can change this anytime in Settings.</Text>
+          <View style={styles.links}>
+            <Text style={styles.link} onPress={() => navigation.navigate('PrivacyPolicy')}>Privacy Policy</Text>
+            <Text style={styles.link} onPress={() => navigation.navigate('Terms')}>Terms and Conditions</Text>
+            <Text style={styles.link} onPress={() => Linking.openURL('https://support.google.com/admob/answer/9012903')}>Vendor list</Text>
           </View>
-          <Switch
-            value={analyticsOn}
-            onValueChange={setAnalyticsOn}
-            trackColor={{false: Pastel.bgAlt, true: Pastel.mint}}
-            thumbColor="#fff"
-          />
+
+          <Section title="Purposes" items={PURPOSES} />
+          <Section title="Special Purposes" items={SPECIAL_PURPOSES} />
+          <Section title="Special Features" items={SPECIAL_FEATURES} />
+          <Section title="Non-IAB Purposes" items={NON_IAB} />
+
+          <View style={{height: 12}} />
+        </ScrollView>
+
+        {/* Fixed action bar */}
+        <View style={styles.actions}>
+          <TouchableOpacity style={styles.accept} activeOpacity={0.9} onPress={() => finish(true)}>
+            <Text style={styles.acceptTxt}>Accept all</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.manage} activeOpacity={0.85} onPress={() => finish(false)}>
+            <Text style={styles.manageTxt}>Manage Settings</Text>
+          </TouchableOpacity>
+          <Text style={styles.poweredBy}>Dotwise Privacy Center</Text>
         </View>
-
-        <View style={{flex: 1}} />
-
-        <Text style={styles.legalLine}>
-          By continuing you agree to our{' '}
-          <Text style={styles.link} onPress={() => navigation.navigate('Terms')}>Terms</Text>
-          {' '}and{' '}
-          <Text style={styles.link} onPress={() => navigation.navigate('PrivacyPolicy')}>Privacy Policy</Text>.
-        </Text>
-
-        <TouchableOpacity style={styles.btn} activeOpacity={0.88} onPress={onAgree}>
-          <Text style={styles.btnTxt}>Agree & Continue</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
-  );
-}
-
-function Bullet({children}: {children: React.ReactNode}) {
-  return (
-    <View style={styles.bullet}>
-      <Text style={styles.bulletDot}>•</Text>
-      <Text style={styles.bulletTxt}>{children}</Text>
+      </SafeAreaView>
     </View>
   );
 }
 
+function Section({title, items}: {title: string; items: string[]}) {
+  return (
+    <View style={styles.section}>
+      <Text style={styles.sectionTitle}>{title}</Text>
+      {items.map((it, i) => (
+        <View key={i} style={styles.itemCard}>
+          <Text style={styles.itemTxt}>{it}</Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+const BORDER = '#E2E2E6';
+const INK = '#1A1A22';
+const MUTED = '#6B6B75';
+const BLUE = '#1A47C2';
+
 const styles = StyleSheet.create({
-  root: {flex: 1, backgroundColor: Pastel.bg},
-  body: {flex: 1, paddingHorizontal: 26, paddingTop: 30, paddingBottom: 24},
-  logoRow: {flexDirection: 'row', flexWrap: 'wrap', width: 86, gap: 8, marginBottom: 22},
-  dot: {width: 39, height: 39, borderRadius: 20},
-  title: {fontSize: 30, fontWeight: '900', color: Pastel.ink, marginBottom: 6},
-  sub: {fontSize: FontSize.md, color: Pastel.inkSoft, marginBottom: 22},
-  card: {backgroundColor: Pastel.card, borderRadius: 20, padding: 18, gap: 12, marginBottom: 20,
-    shadowColor: Pastel.shadow, shadowOffset: {width: 0, height: 3}, shadowOpacity: 0.07, shadowRadius: 8, elevation: 2},
-  bullet: {flexDirection: 'row', gap: 8},
-  bulletDot: {color: Pastel.mint, fontSize: 16, fontWeight: '900', lineHeight: 21},
-  bulletTxt: {flex: 1, fontSize: FontSize.sm, color: Pastel.inkSoft, lineHeight: 21},
-  toggleRow: {flexDirection: 'row', alignItems: 'center', gap: 14, backgroundColor: Pastel.card, borderRadius: 18, padding: 16},
-  toggleLabel: {fontSize: FontSize.md, fontWeight: '700', color: Pastel.ink},
-  toggleSub: {fontSize: 12, color: Pastel.inkDim, marginTop: 3, lineHeight: 17},
-  legalLine: {fontSize: 12, color: Pastel.inkDim, textAlign: 'center', marginBottom: 14, lineHeight: 18},
-  link: {color: Pastel.grape, fontWeight: '700'},
-  btn: {backgroundColor: Pastel.mint, paddingVertical: 17, borderRadius: 16, alignItems: 'center',
-    shadowColor: Pastel.mint, shadowOffset: {width: 0, height: 6}, shadowOpacity: 0.38, shadowRadius: 14, elevation: 6},
-  btnTxt: {fontSize: 17, fontWeight: '900', color: '#fff'},
+  root: {flex: 1, backgroundColor: '#fff'},
+  scroll: {paddingHorizontal: 24, paddingTop: 22, paddingBottom: 10},
+
+  h1: {fontSize: 26, fontWeight: '800', color: INK, marginBottom: 16},
+  body: {fontSize: 15, color: INK, lineHeight: 23},
+
+  links: {flexDirection: 'row', flexWrap: 'wrap', gap: 18, marginTop: 18, marginBottom: 8},
+  link: {fontSize: 14, color: INK, fontWeight: '700'},
+
+  section: {marginTop: 16},
+  sectionTitle: {fontSize: 19, fontWeight: '800', color: INK, marginBottom: 10, marginTop: 6},
+  itemCard: {borderWidth: 1, borderColor: BORDER, borderRadius: 8, paddingVertical: 16, paddingHorizontal: 16, marginBottom: 12},
+  itemTxt: {fontSize: 15, fontWeight: '700', color: INK, lineHeight: 22},
+
+  actions: {borderTopWidth: 1, borderTopColor: BORDER, paddingHorizontal: 20, paddingTop: 12, paddingBottom: 10, gap: 10, backgroundColor: '#fff'},
+  accept: {backgroundColor: BLUE, paddingVertical: 16, borderRadius: 8, alignItems: 'center'},
+  acceptTxt: {color: '#fff', fontSize: 16, fontWeight: '800'},
+  manage: {backgroundColor: '#F1F1F3', paddingVertical: 16, borderRadius: 8, alignItems: 'center'},
+  manageTxt: {color: INK, fontSize: 16, fontWeight: '800'},
+  poweredBy: {textAlign: 'center', color: MUTED, fontSize: 12, marginTop: 4},
 });

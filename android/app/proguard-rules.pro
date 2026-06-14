@@ -15,8 +15,10 @@
 # ── Gesture Handler ───────────────────────────────────────────────────────
 -keep class com.swmansion.gesturehandler.** { *; }
 
-# ── react-native-svg ──────────────────────────────────────────────────────
--keep public class com.horcrux.svg.** { *; }
+# ── react-native-svg (heavily used on the Journey screen) ─────────────────
+-keep class com.horcrux.svg.** { *; }
+-keepnames class com.horcrux.svg.** { *; }
+-dontwarn com.horcrux.svg.**
 
 # ── Lottie ────────────────────────────────────────────────────────────────
 -keep class com.airbnb.lottie.** { *; }

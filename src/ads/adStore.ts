@@ -1,8 +1,9 @@
 import {create} from 'zustand';
 import {AdProvider, RewardResult} from './AdProvider';
+import {AdMobProvider} from './AdMobProvider';
 
-// Simulated rewarded ad. Shows a countdown modal (driven by RewardedAdModal),
-// resolves `completed:true` if the countdown finishes, `false` if dismissed.
+// Real Google AdMob rewarded ads. (The StubAdProvider + countdown modal below
+// remain only as an offline/dev fallback and are no longer the default.)
 class StubAdProvider implements AdProvider {
   loadRewarded() {/* no-op for stub */}
   showRewarded(): Promise<RewardResult> {
@@ -10,7 +11,10 @@ class StubAdProvider implements AdProvider {
   }
 }
 
-export const adProvider: AdProvider = new StubAdProvider();
+export const adProvider: AdProvider = new AdMobProvider();
+// To force the simulated ad instead (e.g. no network in dev):
+//   export const adProvider: AdProvider = new StubAdProvider();
+void StubAdProvider;
 
 interface AdState {
   visible: boolean;

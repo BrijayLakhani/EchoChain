@@ -12,6 +12,7 @@ import {useIapStore} from './src/store/iapStore';
 import {useEconomyStore} from './src/store/economyStore';
 import {analytics} from './src/analytics';
 import {initSfx} from './src/audio/sfx';
+import mobileAds from 'react-native-google-mobile-ads';
 import LoadingScreen from './src/components/LoadingScreen';
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
 
   useEffect(() => {
     initSfx();
+    mobileAds().initialize().catch(() => {});
     (async () => {
       const minSplash = new Promise<void>(res => setTimeout(() => res(), 300));
       await Promise.all([loadConsent(), loadProfile(), loadEconomy(), loadIap(), minSplash]);

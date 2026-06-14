@@ -24,7 +24,13 @@ export default function App() {
 
   useEffect(() => {
     initSfx();
-    mobileAds().initialize().catch(() => {});
+    // The dev/test phone is registered so the real ad unit serves Google TEST
+    // ads to it (always fills, no self-click ban). Only this device is affected;
+    // real users get live ads.
+    mobileAds()
+      .setRequestConfiguration({testDeviceIdentifiers: ['55BEBFCB87410BB1C470D9D82F39CAD6']})
+      .catch(() => {})
+      .finally(() => { mobileAds().initialize().catch(() => {}); });
     (async () => {
       const minSplash = new Promise<void>(res => setTimeout(() => res(), 300));
       await Promise.all([loadConsent(), loadProfile(), loadEconomy(), loadIap(), minSplash]);

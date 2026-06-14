@@ -1,0 +1,426 @@
+--------- beginning of main
+06-15 01:22:00.283  1442  1765 D NetdEventListenerService: DNS Requested by : 895, 10526, 7
+06-15 01:22:00.285 14024 14931 E msys    : E[N mns:DGWClient]_LogError(304)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+06-15 01:22:00.318  1147  1260 D connsyslogger: idx=0 Bootup Log: 4 log files! filecount=5 
+06-15 01:22:00.318  1147  1260 D connsyslogger: idx=1 Bootup Log: 4 log files! filecount=5 
+06-15 01:22:00.318  1147  1260 D connsyslogger: idx=2 Bootup Log: 4 log files! filecount=5 
+06-15 01:22:00.318  1147  1260 D connsyslogger: idx=3 Bootup Log: 3 log files! filecount=5 
+06-15 01:22:00.320  1147  1331 I connsyslogger: thrLogWriter: LogBuf=225.851562KB,idx=1
+06-15 01:22:00.373 14335 14335 D ProcessState: Binder ioctl to enable oneway spam detection failed: Invalid argument
+06-15 01:22:00.380  1442  1463 D InputDispatcher: Inject motion (14335): action=0x0, time=1732354123000000, f=0x0, d=0
+06-15 01:22:00.381  1442  1647 I InputDispatcher: Delivering touch to (5349): action: 0x4, f=0x0, d=0, 'c150443', t=1 
+06-15 01:22:00.381  1442  1647 I InputDispatcher: Delivering touch to (1442): action: 0x0, f=0x0, d=0, '7a3ec83', t=1 +(-1,-1866)
+06-15 01:22:00.382  1442  1473 I ViewRootImpl@a11533d[echochain]: ViewPostIme pointer 0
+--------- beginning of system
+06-15 01:22:00.383  1442  1647 D PowerManagerService: UserActivityStateListenerState: 1
+06-15 01:22:00.383  4368  4368 I SemDvfsHyPerManager: acquire hyper - TouchTABoost/4368@20, type = 1090523139
+06-15 01:22:00.384  2399  2399 W TouchInteractionService: onInputEvent, inputConsumer = com.android.quickstep.-$$Lambda$InputConsumer$cayMJybMMyH-XvJ76yEWjWeqQUo@4021d0a
+06-15 01:22:00.384   797   839 I HYPER-HAL: [RequestManager.cpp]acquire(): Acquired ID : 9629486  [4368 / 20]    HINT :      list : [TASchedtuneBoost / 30] [TIMEOUT / 1500] 
+06-15 01:22:00.384  1442  1463 D InputDispatcher: Inject motion (14335): action=0x1, time=1732354123000000, f=0x0, d=0
+06-15 01:22:00.384  1442  1647 I InputDispatcher: Delivering touch to (1442): action: 0x1, f=0x0, d=0, '7a3ec83', t=1 +(-1,-1866)
+06-15 01:22:00.385  1442  1473 I GestureDetector: obtain mCurrentDownEvent. id: -738969237 caller: com.android.server.wm.SystemGesturesPointerEventListener.onPointerEvent:179 com.android.server.wm.PointerEventDispatcher.onInputEvent:71 android.view.InputEventReceiver.dispatchInputEvent:259 
+06-15 01:22:00.385  2399  2399 W TouchInteractionService: reset
+06-15 01:22:00.386  1442  1473 I GestureDetector: obtain mCurrentDownEvent. id: -738969237 caller: com.android.server.wm.SystemPerformancePointerEventListener.onPointerEvent:89 com.android.server.wm.PointerEventDispatcher.onInputEvent:71 android.view.InputEventReceiver.dispatchInputEvent:259 
+06-15 01:22:00.387  1442  1473 I GestureDetector: obtain mCurrentMotionEventRaw. action: 1 id: -652817004
+06-15 01:22:00.387  1442  1473 I GestureDetector: obtain mCurrentMotionEventRaw. action: 1 id: -652817004
+06-15 01:22:00.387  1442  1473 I ViewRootImpl@a11533d[echochain]: ViewPostIme pointer 1
+06-15 01:22:00.394  1442  1950 I ActivityManager: Killing 13608:com.echochain/u0a668 (adj 850): crash
+06-15 01:22:00.402 14161 14161 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.safetynet.service.START pkg=com.google.android.gms }
+06-15 01:22:00.404 14161 14161 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+06-15 01:22:00.404 14161 14161 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.safebrowsing.SafeBrowsingService.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+06-15 01:22:00.407  1442  1950 I ActivityManager: Killing 13734:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a668i56 (adj 0): isolated not needed
+06-15 01:22:00.409  1442  3026 D OpenGLRenderer: setSurface called with nullptr
+06-15 01:22:00.409  1442  3026 D OpenGLRenderer: setSurface() destroyed EGLSurface
+06-15 01:22:00.409  1442  1950 D ActivityManager: proc ProcessRecord{b49d899 13608:com.echochain/u0a668} already removed. so we skip next process.
+06-15 01:22:00.409  1442  3026 D OpenGLRenderer: destroyEglSurface
+06-15 01:22:00.410 14161 14161 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.appset.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsApiService }
+06-15 01:22:00.411  1442  3026 I BufferQueueProducer: [ViewRootImpl@a11533d[echochain]#4045(BLAST Consumer)4045](id:5a200002388,api:1,p:1442,c:1442) disconnect: api 1
+06-15 01:22:00.412  1442  3026 D OpenGLRenderer: endAllActiveAnimators on 0xb400006df2d03e00 (RippleDrawable) with handle 0xb400006ea143aaa0
+06-15 01:22:00.412  1442  1473 I ViewRootImpl@a11533d[echochain]: dispatchDetachedFromWindow
+06-15 01:22:00.412  1442  1473 D InputTransport: Input channel destroyed: '7a3ec83', fd=752
+06-15 01:22:00.412  1442  1473 W InputManager-JNI: Input channel object '7a3ec83 Application Error: com.echochain (client)' was disposed without first being removed with the input manager!
+06-15 01:22:00.412  1442  1473 D InputTransport: Input channel destroyed: '7a3ec83', fd=753
+06-15 01:22:00.414  1442  1473 I WindowManager: Reparenting to leash, surface=Surface(name=7a3ec83 Application Error: com.echochain)/@0xa6285ad, leashParent=Surface(name=WindowToken{eeb3732 android.view.ViewRootImpl$W@a11533d})/@0x17bd0e2
+06-15 01:22:00.415   859   916 I SurfaceFlinger: id=467977 createSurf (0x0),-1 flag=24000, Surface(name=7a3ec83 Application Error: com.echochain)/@0xa6285ad - animation-leash of window_animation#0
+06-15 01:22:00.417  1442  1473 D WindowManager: makeSurface duration=3 leash=Surface(name=Surface(name=7a3ec83 Application Error: com.echochain)/@0xa6285ad - animation-leash of window_animation)/@0x7403f38
+06-15 01:22:00.419  1442  1473 V WindowManager: removeIfPossible 2, Window{7a3ec83 u0 Application Error: com.echochain}: mAnimatingExit=true caller=com.android.server.wm.WindowState.removeIfPossible:2984 com.android.server.wm.WindowManagerService.removeWindow:2246 com.android.server.wm.Session.remove:225 android.view.ViewRootImpl.dispatchDetachedFromWindow:6099 android.view.ViewRootImpl.doDie:9827 
+06-15 01:22:00.419  1442  1473 V WindowManager: Changing focus from Window{7a3ec83 u0 Application Error: com.echochain EXITING} to Window{e49d347 u0 com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity} displayId=0 Callers=com.android.server.wm.RootWindowContainer.updateFocusedWindowLocked:583 com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:6477 com.android.server.wm.WindowState.setupWindowForRemoveOnExit:3175 com.android.server.wm.WindowState.removeIfPossible:3143 
+06-15 01:22:00.419  1442  1473 D MARsPolicyManager: onPackageResumedFG pkgName = com.sec.android.app.launcher, userId = 0
+06-15 01:22:00.420  1442  1473 I WindowManager: Cancelling animation restarting=true, leash=Surface(name=Surface(name=6bf1202 StatusBar)/@0x444a265 - animation-leash of insets_animation)/@0xb91947e
+06-15 01:22:00.420  1442  1473 I WindowManager: Reparenting to original parent: Surface(name=WindowToken{ad3974d android.os.BinderProxy@118aa77})/@0x9d21b3a, destroy=false, surface=Surface(name=6bf1202 StatusBar)/@0x444a265
+06-15 01:22:00.420  1442  1473 I WindowManager: Reparenting to leash, surface=Surface(name=6bf1202 StatusBar)/@0x444a265, leashParent=Surface(name=WindowToken{ad3974d android.os.BinderProxy@118aa77})/@0x9d21b3a
+06-15 01:22:00.421   859   916 I SurfaceFlinger: id=467978 createSurf (0x0),-1 flag=24000, Surface(name=6bf1202 StatusBar)/@0x444a265 - animation-leash of insets_animation#1
+06-15 01:22:00.423  1442  1473 D WindowManager: makeSurface duration=3 leash=Surface(name=Surface(name=6bf1202 StatusBar)/@0x444a265 - animation-leash of insets_animation)/@0x6ee2b11
+06-15 01:22:00.423  1442  1473 I WindowManager: Cancelling animation restarting=true, leash=Surface(name=Surface(name=c150443 NavigationBar0)/@0xe1e2548 - animation-leash of insets_animation)/@0x9a1ca2c
+06-15 01:22:00.423  1442  1473 I WindowManager: Reparenting to original parent: Surface(name=WindowToken{bbc86cb android.os.BinderProxy@8a3f9d5})/@0xfe1ffe1, destroy=false, surface=Surface(name=c150443 NavigationBar0)/@0xe1e2548
+06-15 01:22:00.423   859   859 I BufferQueueProducer: [Application Error: com.echochain#0](this:0xb4000074ac35f948,id:-1,api:0,p:-1,c:859) queueBuffer: fps=0.05 dur=18806.07 max=18806.07 min=18806.07
+06-15 01:22:00.423  1442  1473 I WindowManager: Reparenting to leash, surface=Surface(name=c150443 NavigationBar0)/@0xe1e2548, leashParent=Surface(name=WindowToken{bbc86cb android.os.BinderProxy@8a3f9d5})/@0xfe1ffe1
+06-15 01:22:00.426  1442  1611 D InputDispatcher: Focus left window (0): 7a3ec83 Application Error: com.echochain
+06-15 01:22:00.427   859  2856 I SurfaceFlinger: id=467979 createSurf (0x0),-1 flag=24000, Surface(name=c150443 NavigationBar0)/@0xe1e2548 - animation-leash of insets_animation#1
+06-15 01:22:00.429  1442  1756 D WifiConnectivityMonitor.NetworkStatsAnalyzer: Backhaul result - RSSI:-57, CE:11, PE:11, TI:14, PTI:14, TW:5, PTW:6, Tx:217, Rx:1328, TxS:2, RxS:0, RESULT:true, IC:0, ICT:5, WC:0, WCT:5, R:0, RC:0, IE:0, EC:0
+06-15 01:22:00.430  1442  1473 D WindowManager: makeSurface duration=7 leash=Surface(name=Surface(name=c150443 NavigationBar0)/@0xe1e2548 - animation-leash of insets_animation)/@0x3f9674d
+06-15 01:22:00.431  1442  1473 D StatusBarManagerService: notifyRequestedSystemKey recent=false home=false
+06-15 01:22:00.433  1442  1473 I WindowManager: Reparenting to leash, surface=Surface(name=Dim Layer for - WindowedMagnification:0:31)/@0xf4ecfa9, leashParent=Surface(name=WindowedMagnification:0:31)/@0x42d5b7e
+06-15 01:22:00.434   859  2856 I SurfaceFlinger: id=467980 createSurf (0x0),-1 flag=24000, Surface(name=Dim Layer for - WindowedMagnification:0:31)/@0xf4ecfa9 - animation-leash of dimmer#0
+06-15 01:22:00.438  1442  1473 D WindowManager: makeSurface duration=5 leash=Surface(name=Surface(name=Dim Layer for - WindowedMagnification:0:31)/@0xf4ecfa9 - animation-leash of dimmer)/@0x138a202
+06-15 01:22:00.439   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678098, screenshot (Wallpaper BBQ wrapper#0)
+06-15 01:22:00.439  1442  1611 I BLASTBufferQueue: [ViewRootImpl@a11533d[echochain]#4045] destructor()
+06-15 01:22:00.439  1442  1611 I BufferQueueConsumer: [ViewRootImpl@a11533d[echochain]#4045(BLAST Consumer)4045](id:5a200002388,api:0,p:-1,c:1442) disconnect
+06-15 01:22:00.439   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678098, screenshot (com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity$_2399#0)
+06-15 01:22:00.440   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678098, screenshot (Dim Layer for - WindowedMagnification:0:31#0)
+06-15 01:22:00.440   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678098, screenshot (Application Error: com.echochain#0)
+06-15 01:22:00.441  1442  1484 I libprocessgroup: Successfully killed process cgroup uid 10668 pid 13608 in 44ms
+06-15 01:22:00.441  1442  1473 D InputTransport: Input channel destroyed: '7a3ec83', fd=755
+06-15 01:22:00.444  1442  3026 D OpenGLRenderer: trimMemory(TRIM_MEMORY_COMPLETE)::destroyRenderingContext
+06-15 01:22:00.444  1442  3026 D OpenGLRenderer: RenderThread::destroyRenderingContext()
+06-15 01:22:00.444  1442  3026 D OpenGLRenderer: RenderThread::setGrContext()
+06-15 01:22:00.445   859   859 I Layer   : id=467967 removedFromDrawingState Surface(name=6bf1202 StatusBar)/@0x444a265 - animation-leash of insets_animation#0 (142)
+06-15 01:22:00.445   859   859 I Layer   : id=467968 removedFromDrawingState Surface(name=c150443 NavigationBar0)/@0xe1e2548 - animation-leash of insets_animation#0 (142)
+06-15 01:22:00.445   859   859 I SurfaceFlinger: id=467967 Removed Surface(name=6bf1202 StatusBar)/@0x444a265 - animation-leash of insets_animation#0 (142)
+06-15 01:22:00.445   859   859 I SurfaceFlinger: id=467968 Removed Surface(name=c150443 NavigationBar0)/@0xe1e2548 - animation-leash of insets_animation#0 (142)
+06-15 01:22:00.446   859   859 I Layer   : id=467967 Destroyed Surface(name=6bf1202 StatusBar)/@0x444a265 - animation-leash of insets_animation#0
+06-15 01:22:00.446   859   859 I Layer   : id=467968 Destroyed Surface(name=c150443 NavigationBar0)/@0xe1e2548 - animation-leash of insets_animation#0
+06-15 01:22:00.450 31784 31784 I Zygote  : Process 13734 exited due to signal 9 (Killed)
+06-15 01:22:00.466  2051  2051 D HidDeviceService: handleMessage(): msg.what=8
+06-15 01:22:00.476  2051  2051 D HidDeviceService: handleMessage(): msg.what=8
+06-15 01:22:00.476  1442  1611 I ActivityManager: Killing 9605:com.android.keychain/1000 (adj 999): empty #31
+06-15 01:22:00.476  1442  1491 D BatteryExternalStatsWorker: update stats : remove-uid (1)
+06-15 01:22:00.482  1442  4330 D InputDispatcher: Focus entered window (0): e49d347 com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity
+06-15 01:22:00.482  1442  1744 D SemNscXgbMsL1: Probability - Cloud gaming: [0.04415229]
+06-15 01:22:00.483  1442  1744 D SemNscXgbMsL1: Probability - Real time: [0.10864212]
+06-15 01:22:00.483  1442  1744 D SemNscXgbMsL1: Probability - Non real time: [0.915227]
+06-15 01:22:00.483  1442  1744 D SemNscXgbMsL1: 1 sample inference time: 1.305538 msecs
+06-15 01:22:00.483  2399  2399 I ViewRootImpl@7913029[LauncherActivity]: MSG_WINDOW_FOCUS_CHANGED 1 1
+06-15 01:22:00.485  1442  2982 D PkgPredictorService-IpmNapPreloadController: app:0_&_com.echochain die, remove from <launchTime:2026-06-15 01:21:24 hour:1 day:2 previous:[com.echochain, com.echochain, com.echochain] running:com.echochain/com.echochain.MainActivity apkVersion:1.0 userId:0 screenOrientation:1 wifi:3 bt:12 predictTime:3 launching Time:887 predicted:true prediction:[0_&_com.echochain, 0_&_com.instagram.android, 0_&_com.whatsapp] preloaded:false preloading:[0_&_com.echochain, 0_&_com.instagram.android, 0_&_com.whatsapp]>
+06-15 01:22:00.485  1442  1744 D SemNscXgbL2Rt: L2 RT 1 sample inference time: 1.624923 msecs
+06-15 01:22:00.486  2399  2399 I BaseActivity: addActivityFlags, flags : 8
+06-15 01:22:00.486  1442  1744 D SemNscXgbL2Nrt: L2 NRT 1 sample inference time: 0.686154 msecs
+06-15 01:22:00.489  2399 26549 I TouchInteractionService: onSystemUiStateChanged, stateFlags : 0
+06-15 01:22:00.494  2399  2399 I InputMethodManager: startInputInner - mService.startInputOrWindowGainedFocus
+06-15 01:22:00.494  1442  4330 D InputMethodManagerService: mSecureKeypadEnabled = false
+06-15 01:22:00.495  1442  4330 V InputMethodManagerService: Unspecified window will hide input
+06-15 01:22:00.495  1442  4330 V InputMethodManagerService: hideCurrentInputLocked : shouldHideSoftInput is false
+06-15 01:22:00.495  1442  4330 D InputMethodManagerService: mDesktopModeManager null!
+06-15 01:22:00.495  1442  4330 V InputMethodManagerService: getDisplayIdOfInputMethodWindowToBeAdded : 0
+06-15 01:22:00.497  1442  4330 D InputMethodManagerService: checkDisplayOfStartInputAndUpdateKeyboard display Id 0last 0
+06-15 01:22:00.497  1442  4330 D InputTransport: Input channel constructed: 'ClientS', fd=724
+06-15 01:22:00.497  1442  4330 D InputTransport: Input channel destroyed: 'ClientS', fd=724
+06-15 01:22:00.499  2399  2399 I BadgeRenderer: Invalid count : 0
+06-15 01:22:00.499  5366  5366 I HBD     : HoneyBoardService onFinishInput 
+06-15 01:22:00.500  1442  1611 I WindowManager: Cancelling animation restarting=true, leash=Surface(name=Surface(name=b30227f InputMethod)/@0x1b8a295 - animation-leash of insets_animation)/@0x25f4bfd
+06-15 01:22:00.500  1442  1611 I WindowManager: Reparenting to original parent: Surface(name=WindowToken{373fd android.os.Binder@7ccc1})/@0x164cfaa, destroy=false, surface=Surface(name=b30227f InputMethod)/@0x1b8a295
+06-15 01:22:00.500  1442  1611 I WindowManager: Reparenting to leash, surface=Surface(name=b30227f InputMethod)/@0x1b8a295, leashParent=Surface(name=WindowToken{373fd android.os.Binder@7ccc1})/@0x164cfaa
+06-15 01:22:00.501  2399  2399 I BadgeRenderer: Invalid count : 0
+06-15 01:22:00.501   859   916 I SurfaceFlinger: id=467981 createSurf (0x0),-1 flag=24004, Surface(name=b30227f InputMethod)/@0x1b8a295 - animation-leash of insets_animation#1
+06-15 01:22:00.502  5366  5366 I HBD     : a IC have been unbinding,  InputConnectionWrapper{idHash=#297084c mMissingMethods=}
+06-15 01:22:00.502  5366  5366 I HBD     : HoneyBoardService [PF_CL][onFinishInput]  3025616 ns 
+06-15 01:22:00.503  2399  2399 I BadgeRenderer: Invalid count : 0
+06-15 01:22:00.503  2399  2399 I BadgeRenderer: Invalid count : 0
+06-15 01:22:00.503  5366  5366 I HBD     : HoneyBoardService [IMI] onStartInput - caller pid : 2399 , caller uid : 10121 
+06-15 01:22:00.503  5366  5366 I HBD     : j updateConfigs 
+06-15 01:22:00.503  5366  5366 I HBD     : j isEnabledNightMode : false 
+06-15 01:22:00.503  2399  2399 I BadgeRenderer: Invalid count : 0
+06-15 01:22:00.503  2399  2399 I BadgeRenderer: Invalid count : 0
+06-15 01:22:00.503  5366  5366 I HBD     : a IC have been binding, InputConnectionWrapper{idHash=#6e435aa mMissingMethods=} 
+06-15 01:22:00.503  5366  5366 I HBD     : h [EditorInputType]setPrivateImeOptionsToTable privateImeOptions ( null )
+06-15 01:22:00.503  2399  2399 I BadgeRenderer: Invalid count : 0
+06-15 01:22:00.504  5366  5366 I HBD     : b incognitoMode : false 
+06-15 01:22:00.504  2399  2399 I BadgeRenderer: Invalid count : 0
+06-15 01:22:00.504  1442  1611 D WindowManager: makeSurface duration=4 leash=Surface(name=Surface(name=b30227f InputMethod)/@0x1b8a295 - animation-leash of insets_animation)/@0x1b93305
+06-15 01:22:00.504  5366  5366 I HBD     : a needOff = true , isForceOff = false, isNullInputClass : true 
+06-15 01:22:00.505  5366  5366 I HBD     : h getDefaultInputRange : UNKNOWN 
+06-15 01:22:00.505  5366  5366 I HBD     : h getDefaultInputRange : UNKNOWN 
+06-15 01:22:00.505  5366  5366 I HBD     : h getDefaultInputRange : UNKNOWN 
+06-15 01:22:00.506  1442  1611 D DARUtil : Device owner status not updated yet...
+06-15 01:22:00.506  1442  1611 D DARUtil : Not an enterprise user : 0
+06-15 01:22:00.506  1442  1611 D DARUtil : Device owner status not updated yet...
+06-15 01:22:00.506  1442  1611 D DARUtil : Not an enterprise user : 0
+06-15 01:22:00.507  5366  5366 I HBD     : a needOff = true , isForceOff = false, isNullInputClass : true 
+06-15 01:22:00.507  5366  5366 I HBD     : a update cached prediction status : false 
+06-15 01:22:00.507  5366  5366 I HBD     : h getDefaultInputRange : UNKNOWN 
+06-15 01:22:00.507  5366  5366 I HBD     : a currentState : 0 
+06-15 01:22:00.510  1442  1491 E system_server: Cannot read thread CPU times for PID 1442
+06-15 01:22:00.510  1442  1491 D BatteryExternalStatsWorker: done updateExternalStatsLocked
+06-15 01:22:00.510  5349  5349 D DisplayImeController: insetsControlChanged(), ime control is null, anim=null
+06-15 01:22:00.511  2399  2399 I TouchInteractionService: onSystemUiFlagsChanged, userUnlocked
+06-15 01:22:00.512  1442  1611 D InputMethodManagerServicePhysicalKey: isConnectedDexOnPC false
+06-15 01:22:00.513  1442  1611 D InputMethodManagerService: isImeSwitcherDisabledPackage : false
+06-15 01:22:00.515  5366  5366 I HBD     : h load selected json path : /data/user/0/com.samsung.android.honeyboard/files/selected.json 
+06-15 01:22:00.515  5366  5366 I HBD     : h load selected json info : {"version":"4.1","currentLanguageOrder":0,"selected":[{"activeOptionList":["auto_replace","spell_check","auto_spacing"],"engName":"English(India)","id":65555,"inputType":"qwerty","isUsed":true},{"activeOptionList":["auto_spacing"],"engName":"Gujarati","id":5767168,"inputType":"qwerty_indian_horizontal","isUsed":true},{"activeOptionList":["auto_spacing"],"engName":"Hindi","id":5570560,"inputType":"qwerty_indian_vertical","isUsed":true}]} 
+06-15 01:22:00.516  5366  5366 I HBD     : a [UpdatePolicy] [post] a: 0 cl: 65555 kit: [0/0] vt: 0 ir: 1 
+06-15 01:22:00.518  5366  5366 I HBD     : HoneyBoardService [PF_OP][onStartInput]  14532308 ns 
+06-15 01:22:00.523   859   859 I Layer   : id=467975 removedFromDrawingState Surface(name=b30227f InputMethod)/@0x1b8a295 - animation-leash of insets_animation#0 (141)
+06-15 01:22:00.532   766   766 I Zygote  : Process 9605 exited due to signal 9 (Killed)
+06-15 01:22:00.548  5349  5626 D MobileStatusTracker(0/3): onSignalStrengthsChanged signalStrength=SignalStrength:{mCdma=Invalid,mGsm=Invalid,mWcdma=Invalid,mTdscdma=Invalid,mLte=CellSignalStrengthLte: rssi=-113 rsrp=-113 rsrq=-16 rssnr=2 cqiTableIndex=2147483647 cqi=2147483647 ta=2147483647 level=2 parametersUseForLevel=0,mNr=Invalid,SignalBarInfo{ lteLevel=2 },rat=14,primary=CellSignalStrengthLte} level=2
+06-15 01:22:00.551  5349  5626 D NetworkController: SignalStrength from intent slotId=0
+06-15 01:22:00.553   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678099, screenshot (Wallpaper BBQ wrapper#0)
+06-15 01:22:00.553   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678099, screenshot (com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity$_2399#0)
+06-15 01:22:00.553   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678099, screenshot (Dim Layer for - WindowedMagnification:0:31#0)
+06-15 01:22:00.553   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678099, screenshot (Application Error: com.echochain#0)
+06-15 01:22:00.568   859   859 D SurfaceFlinger: Display 0 HWC layers:
+06-15 01:22:00.568   859   859 D SurfaceFlinger:      DEVICE | 0xb4000074d8e30e80 | 0100 | RGBx_8888    |   67.0    0.0 1147.0 2400.0 |    0    0 1080 2400 | Wallpaper BBQ wrapper#0
+06-15 01:22:00.568   859   859 D SurfaceFlinger:      DEVICE | 0xb4000074d8e30b80 | 0100 | RGBA_8888    |    0.0    0.0 1080.0 2400.0 |    0    0 1080 2400 | com.sec.android.app.launcher/com.sec[...].activities.LauncherActivity$_2399#0
+06-15 01:22:00.568   859   859 D SurfaceFlinger:  SOLID_COLOR |              | 0000 |  Unknown  |    0.0    0.0    0.0    0.0 |    0    0 1080 2400 | Dim Layer for - WindowedMagnification:0:31#0
+06-15 01:22:00.568   859   859 D SurfaceFlinger:      CLIENT | 0xb4000074d8e2fe00 | 0100 | RGBA_8888    |    0.0    0.0 1080.0   79.0 |    0    0 1080   79 | StatusBar$_5349#0
+06-15 01:22:00.568   859   859 D SurfaceFlinger:      CLIENT | 0xb4000074ac2fc580 | 0100 | RGBA_8888    |    0.0    0.0   67.0  342.0 | 1013  907 1080 1249 | com.samsung.android.app.cocktailbars[...]arservice.CocktailBarService$_4926#0
+06-15 01:22:00.568   859   859 D SurfaceFlinger:      CLIENT | 0xb4000074ad41e180 | 0100 | RGBA_8888    |    0.0    0.0 1080.0  126.0 |    0 2274 1080 2400 | NavigationBar0$_5349#0
+06-15 01:22:00.568   859   859 D SurfaceFlinger:      CLIENT | 0xb4000074b53b5c00 | 0140 | RGBA_8888    |    0.0    0.0 1080.0  181.0 |   
+06-15 01:22:00.569   859   859 D SurfaceFlinger:  0    0 1080  181 | ScreenDecorOverlay$_5349#0
+06-15 01:22:00.569   859   859 D SurfaceFlinger:      CLIENT | 0xb4000074b53b6200 | 0140 | RGBA_8888    |    0.0    0.0 1080.0  181.0 |    0 2219 1080 2400 | ScreenDecorOverlayBottom$_5349#0
+06-15 01:22:00.569   859   859 D SurfaceFlinger: 
+06-15 01:22:00.578   545   545 D io_stats: !@ 179,0 r 494721094 5994816677 w 59017869 1034854296 d 937365 21080636 f 35269983 40690522 iot 242315580 234357589 th 102400 102400 70736 pt 4179988 inp 0 0 1732354.317
+06-15 01:22:00.653   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678100, screenshot (Wallpaper BBQ wrapper#0)
+06-15 01:22:00.653   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678100, screenshot (com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity$_2399#0)
+06-15 01:22:00.654   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678100, screenshot (Dim Layer for - WindowedMagnification:0:31#0)
+06-15 01:22:00.683  1442  1473 I GestureDetector: handleMessage TAP
+06-15 01:22:00.685  1442  1442 I GestureDetector: handleMessage TAP
+06-15 01:22:00.686  1442  4387 D InputMethodManagerService: removeClient
+06-15 01:22:00.687  1442  1687 D ConnectivityService: releasing NetworkRequest [ REQUEST id=162026, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10668 RequestorUid: 10668 RequestorPkg: com.echochain UnderlyingNetworks: Null] ] (release request)
+06-15 01:22:00.687  1442  4379 V ActivityManager: Got obituary of 13608:com.echochain
+06-15 01:22:00.687  1442  4387 D InputTransport: Input channel destroyed: 'ClientS', fd=1145
+06-15 01:22:00.687  1442  1475 W ActivityManager: setHasOverlayUi called on unknown pid: 13608
+06-15 01:22:00.687  1442  1687 D ConnectivityService:  Removing from current network [895 WIFI], leaving 225 requests.
+06-15 01:22:00.687  1442  1687 D ConnectivityService: releasing NetworkRequest [ REQUEST id=162024, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10668 RequestorUid: 10668 RequestorPkg: com.echochain UnderlyingNetworks: Null] ] (release request)
+06-15 01:22:00.687   859  2856 I SurfaceFlinger: id=467958 Removed com.echochain/com.echochain.MainActivity$_13608#0 (141)
+06-15 01:22:00.687  1442  1687 D ConnectivityService:  Removing from current network [895 WIFI], leaving 224 requests.
+06-15 01:22:00.687   859  2856 I SurfaceFlinger: id=467962 Removed Surface(name=b30227f InputMethod)/@0x1b8a295 - animation-leash of insets_animation#1 (141)
+06-15 01:22:00.687   859   916 I SurfaceFlinger: id=467959 Removed Surface(name=6bf1202 StatusBar)/@0x444a265 - animation-leash of insets_animation#1 (141)
+06-15 01:22:00.687   859   916 I SurfaceFlinger: id=467960 Removed Surface(name=c150443 NavigationBar0)/@0xe1e2548 - animation-leash of insets_animation#1 (141)
+06-15 01:22:00.689   766   766 I Zygote  : Process 13608 exited due to signal 9 (Killed)
+06-15 01:22:00.691   859   859 I Layer   : id=467962 Destroyed Surface(name=b30227f InputMethod)/@0x1b8a295 - animation-leash of insets_animation#1
+06-15 01:22:00.691   859   859 E BpTransactionCompletedListener: Failed to transact (-32)
+06-15 01:22:00.691   859   859 I BufferQueueDebug: [com.echochain/com.echochain.MainActivity$_13608#0](this:0xb4000074ad535948,id:-1,api:0,p:-1,c:859) onDestructor()
+06-15 01:22:00.691   859   859 I Layer   : id=467958 Destroyed com.echochain/com.echochain.MainActivity$_13608#0
+06-15 01:22:00.693   859   859 I Layer   : id=467959 Destroyed Surface(name=6bf1202 StatusBar)/@0x444a265 - animation-leash of insets_animation#1
+06-15 01:22:00.693   859   859 I Layer   : id=467960 Destroyed Surface(name=c150443 NavigationBar0)/@0xe1e2548 - animation-leash of insets_animation#1
+06-15 01:22:00.705  1442  1484 I libprocessgroup: Successfully killed process cgroup uid 99056 pid 13734 in 0ms
+06-15 01:22:00.706  1442  1484 I libprocessgroup: Successfully killed process cgroup uid 1000 pid 9605 in 0ms
+06-15 01:22:00.726  1442  1476 I WindowManager: Reparenting to original parent: Surface(name=WindowToken{eeb3732 android.view.ViewRootImpl$W@a11533d})/@0x17bd0e2, destroy=true, surface=Surface(name=7a3ec83 Application Error: com.echochain)/@0xa6285ad
+06-15 01:22:00.744  1442  1476 I WindowManager: Reparenting to original parent: Surface(name=WindowedMagnification:0:31)/@0x42d5b7e, destroy=true, surface=Surface(name=Dim Layer for - WindowedMagnification:0:31)/@0xf4ecfa9
+06-15 01:22:00.748  1442  1476 I WindowManager: Destroying surface Surface(name=Application Error: com.echochain)/@0x22bd7e7 called by com.android.server.wm.WindowStateAnimator.destroySurface:987 com.android.server.wm.WindowStateAnimator.destroySurfaceLocked:518 com.android.server.wm.WindowState.destroySurfaceUnchecked:4229 com.android.server.wm.RootWindowContainer.performSurfacePlacementNoTrace:1110 com.android.server.wm.RootWindowContainer.performSurfacePlacement:959 com.android.server.wm.WindowSurfacePlacer.performSurfacePlacementLoop:189 com.android.server.wm.WindowSurfacePlacer.performSurfacePlacement:130 com.android.server.wm.WindowSurfacePlacer.performSurfacePlacement:119 
+06-15 01:22:00.754   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678101, screenshot (Wallpaper BBQ wrapper#0)
+06-15 01:22:00.754   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678101, screenshot (com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity$_2399#0)
+06-15 01:22:00.754   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678101, screenshot (Dim Layer for - WindowedMagnification:0:31#0)
+06-15 01:22:00.760   859   859 I Layer   : id=467977 removedFromDrawingState Surface(name=7a3ec83 Application Error: com.echochain)/@0xa6285ad - animation-leash of window_animation#0 (137)
+06-15 01:22:00.760   859   859 I Layer   : id=467971 removedFromDrawingState Dim Layer for - WindowedMagnification:0:31#0 (137)
+06-15 01:22:00.760   859   859 I Layer   : id=467980 removedFromDrawingState Surface(name=Dim Layer for - WindowedMagnification:0:31)/@0xf4ecfa9 - animation-leash of dimmer#0 (137)
+06-15 01:22:00.760   859   859 I Layer   : id=467969 removedFromDrawingState Application Error: com.echochain#0 (137)
+06-15 01:22:00.760   859   859 I Layer   : id=467966 removedFromDrawingState 7a3ec83 Application Error: com.echochain#0 (137)
+06-15 01:22:00.760   859   859 I Layer   : id=467965 removedFromDrawingState WindowToken{eeb3732 android.view.ViewRootImpl$W@a11533d}#0 (137)
+06-15 01:22:00.761   859   859 I SurfaceFlinger: id=467971 Removed Dim Layer for - WindowedMagnification:0:31#0 (137)
+06-15 01:22:00.761   859   859 I SurfaceFlinger: id=467965 Removed WindowToken{eeb3732 android.view.ViewRootImpl$W@a11533d}#0 (137)
+06-15 01:22:00.761   859   859 I SurfaceFlinger: id=467966 Removed 7a3ec83 Application Error: com.echochain#0 (137)
+06-15 01:22:00.761   859   859 I SurfaceFlinger: id=467977 Removed Surface(name=7a3ec83 Application Error: com.echochain)/@0xa6285ad - animation-leash of window_animation#0 (137)
+06-15 01:22:00.761   859   859 I SurfaceFlinger: id=467969 Removed Application Error: com.echochain#0 (137)
+06-15 01:22:00.761   859   859 I SurfaceFlinger: id=467980 Removed Surface(name=Dim Layer for - WindowedMagnification:0:31)/@0xf4ecfa9 - animation-leash of dimmer#0 (137)
+06-15 01:22:00.761   859   859 I Layer   : id=467965 Destroyed WindowToken{eeb3732 android.view.ViewRootImpl$W@a11533d}#0
+06-15 01:22:00.762   859   859 I Layer   : id=467977 Destroyed Surface(name=7a3ec83 Application Error: com.echochain)/@0xa6285ad - animation-leash of window_animation#0
+06-15 01:22:00.762   859   859 I Layer   : id=467966 Destroyed 7a3ec83 Application Error: com.echochain#0
+06-15 01:22:00.762   859   859 I BufferQueueDebug: [Application Error: com.echochain#0](this:0xb4000074ac35f948,id:-1,api:0,p:-1,c:859) onDestructor()
+06-15 01:22:00.762   859   859 I Layer   : id=467969 Destroyed Application Error: com.echochain#0
+06-15 01:22:00.762   859   859 I Layer   : id=467980 Destroyed Surface(name=Dim Layer for - WindowedMagnification:0:31)/@0xf4ecfa9 - animation-leash of dimmer#0
+06-15 01:22:00.764   859   859 I Layer   : id=467971 Destroyed Dim Layer for - WindowedMagnification:0:31#0
+06-15 01:22:00.767   859   859 D SurfaceFlinger: Display 0 HWC layers:
+06-15 01:22:00.767   859   859 D SurfaceFlinger:      DEVICE | 0xb4000074d8e30e80 | 0100 | RGBx_8888    |   67.0    0.0 1147.0 2400.0 |    0    0 1080 2400 | Wallpaper BBQ wrapper#0
+06-15 01:22:00.767   859   859 D SurfaceFlinger:      DEVICE | 0xb4000074d8e30b80 | 0100 | RGBA_8888    |    0.0    0.0 1080.0 2400.0 |    0    0 1080 2400 | com.sec.android.app.launcher/com.sec[...].activities.LauncherActivity$_2399#0
+06-15 01:22:00.767   859   859 D SurfaceFlinger:      DEVICE | 0xb4000074d8e2fe00 | 0100 | RGBA_8888    |    0.0    0.0 1080.0   79.0 |    0    0 1080   79 | StatusBar$_5349#0
+06-15 01:22:00.767   859   859 D SurfaceFlinger:      DEVICE | 0xb4000074ac2fc580 | 0100 | RGBA_8888    |    0.0    0.0   67.0  342.0 | 1013  907 1080 1249 | com.samsung.android.app.cocktailbars[...]arservice.CocktailBarService$_4926#0
+06-15 01:22:00.767   859   859 D SurfaceFlinger:      DEVICE | 0xb4000074ad41e180 | 0100 | RGBA_8888    |    0.0    0.0 1080.0  126.0 |    0 2274 1080 2400 | NavigationBar0$_5349#0
+06-15 01:22:00.767   859   859 D SurfaceFlinger:      DEVICE | 0xb4000074b53b5c00 | 0140 | RGBA_8888    |    0.0    0.0 1080.0  181.0 |    0    0 1080  181 | ScreenDecorOverlay$_5349#0
+06-15 01:22:00.767   859   859 D SurfaceFlinger:      DEVICE | 0xb4000074b53b6200 | 0140 | RGBA_8888    |    0.0    0.0 1080.0  181.0 |    0 2219 10
+06-15 01:22:00.767   859   859 D SurfaceFlinger: 80 2400 | ScreenDecorOverlayBottom$_5349#0
+06-15 01:22:00.767   859   859 D SurfaceFlinger: 
+06-15 01:22:00.826  1739  1739 I WifiHAL : Get link layer stats
+06-15 01:22:00.826  1739  1739 I WifiHAL : GetLinkStatsCommand::create
+06-15 01:22:00.827  1739  1739 D android.hardware.wifi@1.0-service-lazy: WifiRequest::create vendor command to iface 40, vendor_id=0x1a11, subcmd=0x1200, res=0
+06-15 01:22:00.827  1739  1739 I android.hardware.wifi@1.0-service-lazy: WifiCommand::requestResponse err=-95
+06-15 01:22:00.827  1739  1739 I WifiHAL : wifi_get_link_stats: result=-3
+06-15 01:22:00.828  1442  1754 E SemWifiVendorHal: getWifiLinkLayerStats_1_5_Internal(l.456) failed {.code = ERROR_NOT_SUPPORTED, .description = }
+06-15 01:22:00.855   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678102, screenshot (Wallpaper BBQ wrapper#0)
+06-15 01:22:00.855   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678102, screenshot (com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity$_2399#0)
+06-15 01:22:00.988  1442  1744 D SemNscXgbMsL1: Probability - Cloud gaming: [0.032751247]
+06-15 01:22:00.989  1442  1744 D SemNscXgbMsL1: Probability - Real time: [0.120100625]
+06-15 01:22:00.989  1442  1744 D SemNscXgbMsL1: Probability - Non real time: [0.923717]
+06-15 01:22:00.989  1442  1744 D SemNscXgbMsL1: 1 sample inference time: 1.251923 msecs
+06-15 01:22:00.991  1442  1744 D SemNscXgbL2Rt: L2 RT 1 sample inference time: 1.987616 msecs
+06-15 01:22:00.993  1442  1744 D SemNscXgbL2Nrt: L2 NRT 1 sample inference time: 1.695385 msecs
+06-15 01:22:01.185  1442  1703 D DeviceStorageMonitorService: check() STORAGE TOTAL > 64G
+06-15 01:22:01.186  1442  1703 W DeviceStorageMonitorService: check(/data) oldLevel:1, newLevel:1 (usableBytes=4833058816)
+06-15 01:22:01.186  1442  1703 W DeviceStorageMonitorService: updateBroadcasts(/data) oldLevel:1, newLevel:1, seq:1
+06-15 01:22:01.188  1442  1703 D DeviceStorageMonitorService: Available File Node Number is [13126775]
+06-15 01:22:01.188  1442  1703 W DeviceStorageMonitorService: updateBroadcasts_filenode(/data) fn_oldLevel:0, fn_newLevel:0, seq:1
+06-15 01:22:01.213 12037 12037 I wpa_supplicant: Heartbeat 3341
+06-15 01:22:01.495  1442  1744 D SemNscXgbMsL1: Probability - Cloud gaming: [0.04336829]
+06-15 01:22:01.496  1442  1744 D SemNscXgbMsL1: Probability - Real time: [0.15342654]
+06-15 01:22:01.496  1442  1744 D SemNscXgbMsL1: Probability - Non real time: [0.922906]
+06-15 01:22:01.496  1442  1744 D SemNscXgbMsL1: 1 sample inference time: 1.30523 msecs
+06-15 01:22:01.498  1442  1744 D SemNscXgbL2Rt: L2 RT 1 sample inference time: 2.056538 msecs
+06-15 01:22:01.500  1442  1744 D SemNscXgbL2Nrt: L2 NRT 1 sample inference time: 1.332923 msecs
+06-15 01:22:01.602  1739  1739 I WifiHAL : Get link layer stats
+06-15 01:22:01.602  1739  1739 I WifiHAL : GetLinkStatsCommand::create
+06-15 01:22:01.602  1739  1739 D android.hardware.wifi@1.0-service-lazy: WifiRequest::create vendor command to iface 40, vendor_id=0x1a11, subcmd=0x1200, res=0
+06-15 01:22:01.603  1739  1739 I android.hardware.wifi@1.0-service-lazy: WifiCommand::requestResponse err=-95
+06-15 01:22:01.603  1739  1739 I WifiHAL : wifi_get_link_stats: result=-3
+06-15 01:22:01.604  1442  1676 E WifiVendorHal: getWifiLinkLayerStats_1_5_Internal(l.1191) failed {.code = ERROR_NOT_SUPPORTED, .description = }
+06-15 01:22:01.830  1147  1260 D connsyslogger: idx=0 Bootup Log: 4 log files! filecount=5 
+06-15 01:22:01.830  1147  1260 D connsyslogger: idx=1 Bootup Log: 4 log files! filecount=5 
+06-15 01:22:01.830  1147  1260 D connsyslogger: idx=2 Bootup Log: 4 log files! filecount=5 
+06-15 01:22:01.830  1147  1260 D connsyslogger: idx=3 Bootup Log: 3 log files! filecount=5 
+06-15 01:22:01.831  5349  5626 D MobileStatusTracker(0/3): onSignalStrengthsChanged signalStrength=SignalStrength:{mCdma=Invalid,mGsm=Invalid,mWcdma=Invalid,mTdscdma=Invalid,mLte=CellSignalStrengthLte: rssi=-113 rsrp=-113 rsrq=-11 rssnr=2 cqiTableIndex=2147483647 cqi=2147483647 ta=2147483647 level=2 parametersUseForLevel=0,mNr=Invalid,SignalBarInfo{ lteLevel=2 },rat=14,primary=CellSignalStrengthLte} level=2
+06-15 01:22:01.832  1147  1331 I connsyslogger: thrLogWriter: LogBuf=228.188477KB,idx=0
+06-15 01:22:01.833  5349  5626 D NetworkController: SignalStrength from intent slotId=0
+06-15 01:22:01.837  1739  1739 I WifiHAL : Get link layer stats
+06-15 01:22:01.837  1739  1739 I WifiHAL : GetLinkStatsCommand::create
+06-15 01:22:01.837  1739  1739 D android.hardware.wifi@1.0-service-lazy: WifiRequest::create vendor command to iface 40, vendor_id=0x1a11, subcmd=0x1200, res=0
+06-15 01:22:01.837  1739  1739 I android.hardware.wifi@1.0-service-lazy: WifiCommand::requestResponse err=-95
+06-15 01:22:01.837  1739  1739 I WifiHAL : wifi_get_link_stats: result=-3
+06-15 01:22:01.839  1442  1754 E SemWifiVendorHal: getWifiLinkLayerStats_1_5_Internal(l.456) failed {.code = ERROR_NOT_SUPPORTED, .description = }
+06-15 01:22:01.886   797 14338 I HYPER-HAL: [RequestManager.cpp]releaseLocked(): Released ID : 9629486
+06-15 01:22:01.981  1147  1258 D connsyslogger: SD_LOG_ROOT is /data/debuglogger/connsyslog/fw.
+06-15 01:22:01.981  1147  1258 D connsyslogger: systemReady:1
+06-15 01:22:02.002  1442  1744 D SemNscXgbMsL1: Probability - Cloud gaming: [0.03956132]
+06-15 01:22:02.003  1442  1744 D SemNscXgbMsL1: Probability - Real time: [0.15260595]
+06-15 01:22:02.003  1442  1744 D SemNscXgbMsL1: Probability - Non real time: [0.8967584]
+06-15 01:22:02.003  1442  1744 D SemNscXgbMsL1: 1 sample inference time: 1.199385 msecs
+06-15 01:22:02.006  1442  1744 D SemNscXgbL2Rt: L2 RT 1 sample inference time: 2.162846 msecs
+06-15 01:22:02.007  1442  1744 D SemNscXgbL2Nrt: L2 NRT 1 sample inference time: 1.480692 msecs
+06-15 01:22:02.465 12436 12436 I BluetoothAdapter: STATE_ON
+06-15 01:22:02.470  1442  1474 D BluetoothManagerService: mStateChangeCallbacks count 53
+06-15 01:22:02.470 12436 12436 D BluetoothGatt: connect() - device: F7:0D:31:7E:06:32, auto: false
+06-15 01:22:02.470 12436 12436 I BluetoothAdapter: isSecureModeEnabled
+06-15 01:22:02.471  2051 15359 D BtConfig.SecureMode: isSecureModeOn:false
+06-15 01:22:02.471 12436 12436 D BluetoothGatt: registerApp()
+06-15 01:22:02.471 12436 12436 D BluetoothGatt: registerApp() - UUID=091902ca-56b1-419a-b18f-fc8f3d853121
+06-15 01:22:02.474  2051 15359 D BtGatt.GattService: registerClient(com.crrepa.band.dafit) - UUID=091902ca-56b1-419a-b18f-fc8f3d853121
+06-15 01:22:02.476  2051 15359 D BtGatt.ContextMap: add() - appUid: 10328, appPid: 12436, appName: com.crrepa.band.dafit
+06-15 01:22:02.477  2051  2181 D BtGatt.GattService: onClientRegistered() - UUID=091902ca-56b1-419a-b18f-fc8f3d853121, clientIf=13
+06-15 01:22:02.477 12436 12436 D EventBus: No subscribers registered for event class com.android.mltcode.paycertificationapi.u10
+06-15 01:22:02.477 12436 12436 D EventBus: No subscribers registered for event class com.android.mltcode.paycertificationapi.pl5
+06-15 01:22:02.477 12436 13416 D BluetoothGatt: onClientRegistered() - status=0 clientIf=13
+06-15 01:22:02.484  2051 15359 D BtGatt.GattService: clientConnect(com.crrepa.band.dafit) - address = F70D31_2, isDirect=true transport =2 set own addr = false own addr type:0, clientIf: 13, opportunistic=false, phy: 1
+06-15 01:22:02.487  2051  2262 E bt_stack: [ERROR:gatt_api.cc(1237)] GATT_Connectgatt_if=13, address=f7:0d:31:7e:06:32, is_direct=1, opportunistic=0
+06-15 01:22:02.488  2051  2262 I bt_stack: [INFO:gatt_attr.cc(888)] gatt_sr_init_cl_status: bda=f7:0d:31:7e:06:32, cl_supp_feat=0000, aware=1
+06-15 01:22:02.488  2051  2262 W bt_btm  : btm_add_dev_to_controller: unknown device. treat as addr_type=0
+06-15 01:22:02.489  2051  2262 W bt_btm  : btm_ble_disable_resolving_list() rl_state = 0x0, rl_mask = 0x1, to_resume = 1
+06-15 01:22:02.508  1442  1744 D SemNscXgbMsL1: Probability - Cloud gaming: [0.041391842]
+06-15 01:22:02.508  1442  1744 D SemNscXgbMsL1: Probability - Real time: [0.13965133]
+06-15 01:22:02.508  1442  1744 D SemNscXgbMsL1: Probability - Non real time: [0.8790781]
+06-15 01:22:02.508  1442  1744 D SemNscXgbMsL1: 1 sample inference time: 0.514154 msecs
+06-15 01:22:02.510  1442  1744 D SemNscXgbL2Rt: L2 RT 1 sample inference time: 1.025154 msecs
+06-15 01:22:02.511  1442  1744 D SemNscXgbL2Nrt: L2 NRT 1 sample inference time: 0.721231 msecs
+06-15 01:22:02.701 14347 14347 D ProcessState: Binder ioctl to enable oneway spam detection failed: Invalid argument
+06-15 01:22:02.704  1442  1950 I EDMNativeHelperService: isScreenCaptureEnabled
+06-15 01:22:02.705  1442  1950 D RestrictionPolicy: isScreenCaptureEnabled : ret=true userId=0
+06-15 01:22:02.717   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678103, screenshot (Wallpaper BBQ wrapper#0)
+06-15 01:22:02.717   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678103, screenshot (com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity$_2399#0)
+06-15 01:22:02.718   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678103, screenshot (StatusBar$_5349#0)
+06-15 01:22:02.718   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678103, screenshot (com.samsung.android.app.cocktailbarservice/com.samsung.android.app.cocktailbarservice.CocktailBarService$_4926#0)
+06-15 01:22:02.718   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678103, screenshot (NavigationBar0$_5349#0)
+06-15 01:22:02.729 14347 14349 D hw-ProcessState: Binder ioctl to enable oneway spam detection failed: Invalid argument
+06-15 01:22:02.765 14347 14349 E ion     : ioctl c0044901 failed with code -1: Invalid argument
+06-15 01:22:02.831  1147  1147 D connsyslogger: Open FIFO for close
+06-15 01:22:02.852  1739  1739 I WifiHAL : Get link layer stats
+06-15 01:22:02.852  1739  1739 I WifiHAL : GetLinkStatsCommand::create
+06-15 01:22:02.853  1739  1739 D android.hardware.wifi@1.0-service-lazy: WifiRequest::create vendor command to iface 40, vendor_id=0x1a11, subcmd=0x1200, res=0
+06-15 01:22:02.853  1739  1739 I android.hardware.wifi@1.0-service-lazy: WifiCommand::requestResponse err=-95
+06-15 01:22:02.853  1739  1739 I WifiHAL : wifi_get_link_stats: result=-3
+06-15 01:22:02.854  1442  1754 E SemWifiVendorHal: getWifiLinkLayerStats_1_5_Internal(l.456) failed {.code = ERROR_NOT_SUPPORTED, .description = }
+06-15 01:22:03.013  1442  1744 D SemNscXgbMsL1: Probability - Cloud gaming: [0.046600476]
+06-15 01:22:03.013  1442  1744 D SemNscXgbMsL1: Probability - Real time: [0.15773287]
+06-15 01:22:03.013  1442  1744 D SemNscXgbMsL1: Probability - Non real time: [0.9035665]
+06-15 01:22:03.013  1442  1744 D SemNscXgbMsL1: 1 sample inference time: 0.911616 msecs
+06-15 01:22:03.015  1442  1744 D SemNscXgbL2Rt: L2 RT 1 sample inference time: 1.381462 msecs
+06-15 01:22:03.016  1442  1744 D SemNscXgbL2Nrt: L2 NRT 1 sample inference time: 0.968308 msecs
+06-15 01:22:03.109  5349  5626 D MobileStatusTracker(0/3): onSignalStrengthsChanged signalStrength=SignalStrength:{mCdma=Invalid,mGsm=Invalid,mWcdma=Invalid,mTdscdma=Invalid,mLte=CellSignalStrengthLte: rssi=-113 rsrp=-113 rsrq=-13 rssnr=2 cqiTableIndex=2147483647 cqi=2147483647 ta=2147483647 level=2 parametersUseForLevel=0,mNr=Invalid,SignalBarInfo{ lteLevel=2 },rat=14,primary=CellSignalStrengthLte} level=2
+06-15 01:22:03.112  5349  5626 D NetworkController: SignalStrength from intent slotId=0
+06-15 01:22:03.222   746   746 E audit   : type=1400 audit(1781479323.218:1463007): avc:  denied  { write } for  pid=14161 comm="PerfettoTrace" name="traced_producer" dev="tmpfs" ino=11231 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:traced_producer_socket:s0 tclass=sock_file permissive=0 SEPF_SM-A315F_12_0001 audit_filtered
+06-15 01:22:03.222   746   746 E audit   : type=1300 audit(1781479323.218:1463007): arch=c00000b7 syscall=203 success=no exit=-13 a0=174 a1=6a0105aaf0 a2=1e a3=ffffffff95eb3769 items=0 ppid=766 pid=14161 auid=4294967295 uid=10214 gid=10214 euid=10214 suid=10214 fsuid=10214 egid=10214 sgid=10214 fsgid=10214 tty=(none) ses=4294967295 comm="PerfettoTrace" exe="/system/bin/app_process64" subj=u:r:gmscore_app:s0:c512,c768 key=(null)
+06-15 01:22:03.222   746   746 E audit   : type=1327 audit(1781479323.218:1463007): proctitle="com.google.android.gms"
+06-15 01:22:03.264 14347 14347 D RefBase : RefBase: Explicit destruction, weak count = 0 (in 0x782d1ba910)
+06-15 01:22:03.272 14347 14347 D RefBase : #00 pc 00000000000f0c18  /apex/com.android.runtime/lib64/bionic/libc.so (__cxa_finalize+288)
+06-15 01:22:03.272 14347 14347 D RefBase : #01 pc 00000000000e1de8  /apex/com.android.runtime/lib64/bionic/libc.so (exit+24)
+06-15 01:22:03.272 14347 14347 D RefBase : #02 pc 0000000000082184  /apex/com.android.runtime/lib64/bionic/libc.so (__libc_init+100)
+06-15 01:22:03.387  1442  1505 D PowerManagerService: UserActivityStateListenerState: 0
+06-15 01:22:03.518  1442  1744 D SemNscXgbMsL1: Probability - Cloud gaming: [0.03092018]
+06-15 01:22:03.519  1442  1744 D SemNscXgbMsL1: Probability - Real time: [0.13832107]
+06-15 01:22:03.519  1442  1744 D SemNscXgbMsL1: Probability - Non real time: [0.8938069]
+06-15 01:22:03.519  1442  1744 D SemNscXgbMsL1: 1 sample inference time: 1.184077 msecs
+06-15 01:22:03.521  1442  1744 D SemNscXgbL2Rt: L2 RT 1 sample inference time: 1.949154 msecs
+06-15 01:22:03.523  1442  1744 D SemNscXgbL2Nrt: L2 NRT 1 sample inference time: 1.502154 msecs
+06-15 01:22:03.600   554   554 I android.system.suspend@1.0-service: !@Released: PowerManagerService.WakeLocks(33825ms)
+06-15 01:22:03.718   746   746 E audit   : type=1400 audit(1781479323.714:1463008): avc:  denied  { write } for  pid=14161 comm="ThreadPoolForeg" name="traced_producer" dev="tmpfs" ino=11231 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:traced_producer_socket:s0 tclass=sock_file permissive=0 SEPF_SM-A315F_12_0001 audit_filtered
+06-15 01:22:03.869  1739  1739 I WifiHAL : Get link layer stats
+06-15 01:22:03.869  1739  1739 I WifiHAL : GetLinkStatsCommand::create
+06-15 01:22:03.870  1739  1739 D android.hardware.wifi@1.0-service-lazy: WifiRequest::create vendor command to iface 40, vendor_id=0x1a11, subcmd=0x1200, res=0
+06-15 01:22:03.870  1739  1739 I android.hardware.wifi@1.0-service-lazy: WifiCommand::requestResponse err=-95
+06-15 01:22:03.870  1739  1739 I WifiHAL : wifi_get_link_stats: result=-3
+06-15 01:22:03.871  1442  1754 E SemWifiVendorHal: getWifiLinkLayerStats_1_5_Internal(l.456) failed {.code = ERROR_NOT_SUPPORTED, .description = }
+06-15 01:22:03.871  1442  1754 I SemWifiEleStateTracker: Ele Parameters BD : 0 0 0 0 0 0 MD : -112 -113 -113 -113 -113 -113 WD : -58 -58 -57 -58 -58 -57 GC : false false false false false false SC : false false false false false false SH : false false false false false false TB : false false false false false false
+06-15 01:22:03.911 24511 13866 I NearbyMediums: No BLE Fast/GATT advertisements found in the latest cycle.
+06-15 01:22:03.912 24511 13866 I NearbyMediums: Current Tracked Scanning Clients are : {NearbyConnections.EnvironmentMonitor, NearbySharing}
+06-15 01:22:03.914 24511 13867 I NearbyConnections: Processing lost BlePeripheral BlePeripheral{advertisement=BleAdvertisement { version=2, socketVersion=2, isFast=true, serviceIdHash=null, data=[ 0x23 0x47 0x51 0x47 0x30 0x11 0x32 0x4e 0xd4 0x6a 0x22 0xb6 0x08 0xad 0x1e 0x56 0x39 0xf7 0xa6 0x78 0x2d 0xff 0x0d ], deviceToken=[ 0x3a 0x15 ], rxAdvertisement=null }, dctAdvertisement=null, address=null, psm=0, deviceToken=<ByteString@d434f0d size=2 contents=":\025">, isSecondProfile=false, rxInstantConnectionAdv=null}.
+06-15 01:22:03.914 24511 13867 I NearbyConnections: Lost BleEndpoint for BlePeripheral BlePeripheral{advertisement=BleAdvertisement { version=2, socketVersion=2, isFast=true, serviceIdHash=null, data=[ 0x23 0x47 0x51 0x47 0x30 0x11 0x32 0x4e 0xd4 0x6a 0x22 0xb6 0x08 0xad 0x1e 0x56 0x39 0xf7 0xa6 0x78 0x2d 0xff 0x0d ], deviceToken=[ 0x3a 0x15 ], rxAdvertisement=null }, dctAdvertisement=null, address=null, psm=0, deviceToken=<ByteString@d434f0d size=2 contents=":\025">, isSecondProfile=false, rxInstantConnectionAdv=null} (with EndpointId GQG0 and EndpointInfo [ 0x32 0x4e 0xd4 0x6a 0x22 0xb6 0x08 0xad 0x1e 0x56 0x39 0xf7 0xa6 0x78 0x2d 0xff 0x0d ]).
+06-15 01:22:03.915 24511 13867 I NearbyConnections: Unable to record lost endpoint due to null currentDiscoveryPhase
+06-15 01:22:03.915 24511 13867 I NearbyConnections: ClientProxy(254425078) reporting onEndpointLost(GQG0)
+06-15 01:22:03.915 24511 13867 I NearbyConnections: Processing lost BlePeripheral BlePeripheral{advertisement=BleAdvertisement { version=2, socketVersion=2, isFast=true, serviceIdHash=null, data=[ 0x23 0x44 0x43 0x47 0x37 0x11 0x32 0x30 0xce 0xf7 0x1e 0x6e 0x40 0x57 0xc0 0x2d 0xbc 0x6b 0x97 0xf3 0x1e 0x87 0x79 ], deviceToken=[ 0xaa 0xd5 ], rxAdvertisement=null }, dctAdvertisement=null, address=null, psm=0, deviceToken=<ByteString@8cccec2 size=2 contents="\252\325">, isSecondProfile=false, rxInstantConnectionAdv=null}.
+06-15 01:22:03.915 24511 13867 I NearbyConnections: Lost BleEndpoint for BlePeripheral BlePeripheral{advertisement=BleAdvertisement { version=2, socketVersion=2, isFast=true, serviceIdHash=null, data=[ 0x23 0x44 0x43 0x47 0x37 0x11 0x32 0x30 0xce 0xf7 0x1e 0x6e 0x40 0x57 0xc0 0x2d 0xbc 0x6b 0x97 0xf3 0x1e 0x87 0x79 ], deviceToken=[ 0xaa 0xd5 ], rxAdvertisement=null }, dctAdvertisement=null, address=null, psm=0, deviceToken=<ByteString@8cccec2 size=2 contents="\252\325">, isSecondProfile=false, rxInstantConnectionAdv=null} (with EndpointId DCG7 and EndpointInfo [ 0x32 0x30 0xce 0xf7 0x1e 0x6e 0x40 0x57 0xc0 0x2d 0xbc 0x6b 0x97 0xf3 0x1e 0x87 0x79 ]).
+06-15 01:22:03.916 24511 13867 I NearbyConnections: Unable to record lost endpoint due to null currentDiscoveryPhase
+06-15 01:22:03.916 24511 13867 I NearbyConnections: ClientProxy(254425078) reporting onEndpointLost(DCG7)
+06-15 01:22:03.916 24511 10286 I NearbySharing: NearbySharing Internal event EndpointLost(endpointId=GQG0)
+06-15 01:22:03.917 24511 13866 I NearbySharing: NearbySharing Internal event EndpointLost(endpointId=DCG7)
+06-15 01:22:03.981  1147  1258 D connsyslogger: SD_LOG_ROOT is /data/debuglogger/connsyslog/fw.
+06-15 01:22:03.982  1147  1258 D connsyslogger: systemReady:1
+06-15 01:22:04.026  1442  1744 D SemNscXgbMsL1: Probability - Cloud gaming: [0.04415229]
+06-15 01:22:04.027  1442  1744 D SemNscXgbMsL1: Probability - Real time: [0.10864212]
+06-15 01:22:04.027  1442  1744 D SemNscXgbMsL1: Probability - Non real time: [0.915227]
+06-15 01:22:04.027  1442  1744 D SemNscXgbMsL1: 1 sample inference time: 1.143076 msecs
+06-15 01:22:04.029  1442  1744 D SemNscXgbL2Rt: L2 RT 1 sample inference time: 2.175154 msecs
+06-15 01:22:04.031  1442  1744 D SemNscXgbL2Nrt: L2 NRT 1 sample inference time: 1.475385 msecs
+06-15 01:22:04.389  5349  5626 D MobileStatusTracker(0/3): onSignalStrengthsChanged signalStrength=SignalStrength:{mCdma=Invalid,mGsm=Invalid,mWcdma=Invalid,mTdscdma=Invalid,mLte=CellSignalStrengthLte: rssi=-113 rsrp=-113 rsrq=-12 rssnr=2 cqiTableIndex=2147483647 cqi=2147483647 ta=2147483647 level=2 parametersUseForLevel=0,mNr=Invalid,SignalBarInfo{ lteLevel=2 },rat=14,primary=CellSignalStrengthLte} level=2
+06-15 01:22:04.391  5349  5626 D NetworkController: SignalStrength from intent slotId=0
+06-15 01:22:04.427  1442  1744 I SemWifiServiceDetector: Traff. tracking suspended
+06-15 01:22:04.621  1739  1739 I WifiHAL : Get link layer stats
+06-15 01:22:04.621  1739  1739 I WifiHAL : GetLinkStatsCommand::create
+06-15 01:22:04.621  1739  1739 D android.hardware.wifi@1.0-service-lazy: WifiRequest::create vendor command to iface 40, vendor_id=0x1a11, subcmd=0x1200, res=0
+06-15 01:22:04.621  1739  1739 I android.hardware.wifi@1.0-service-lazy: WifiCommand::requestResponse err=-95
+06-15 01:22:04.621  1739  1739 I WifiHAL : wifi_get_link_stats: result=-3
+06-15 01:22:04.623  1442  1676 E WifiVendorHal: getWifiLinkLayerStats_1_5_Internal(l.1191) failed {.code = ERROR_NOT_SUPPORTED, .description = }
+06-15 01:22:04.640  5349  5349 D NetworkController.WifiSignalController: notifyListener: visible=true, enabled=true, connected=true, inetCondition=1, isDefault=true, receivedCR=true, receivedIC=-1, shouldForceHide=false, emptyConnected=false
+06-15 01:22:04.677   859   859 I BufferQueueProducer: [StatusBar$_5349#0](this:0xb4000074ac3d3948,id:-1,api:0,p:-1,c:859) queueBuffer: fps=0.22 dur=4622.30 max=4622.30 min=4622.30
+06-15 01:22:04.681   786 30481 I hwcomposer: [HWCDisplay] [Display_0 (type:1)] fps:4.771330,dur:4610.87,max:3914.63,min:11.74  
+06-15 01:22:04.685   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678104, screenshot (Wallpaper BBQ wrapper#0)
+06-15 01:22:04.686   859   859 I SurfaceFlinger: operator()(), mtkRenderCntDebug 5678104, screenshot (com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity$_2399#0)
+06-15 01:22:04.868  1442  1458 I system_server: Background young concurrent copying GC freed 336654(16MB) AllocSpace objects, 146(4548KB) LOS objects, 11% free, 162MB/183MB, paused 566us,290us total 171.800ms
+06-15 01:22:04.887  1739  1739 I WifiHAL : Get link layer stats
+06-15 01:22:04.887  1739  1739 I WifiHAL : GetLinkStatsCommand::create
+06-15 01:22:04.887  1739  1739 D android.hardware.wifi@1.0-service-lazy: WifiRequest::create vendor command to iface 40, vendor_id=0x1a11, subcmd=0x1200, res=0
+06-15 01:22:04.887  1739  1739 I android.hardware.wifi@1.0-service-lazy: WifiCommand::requestResponse err=-95
+06-15 01:22:04.887  1739  1739 I WifiHAL : wifi_get_link_stats: result=-3
+06-15 01:22:04.888  1442  1754 E SemWifiVendorHal: getWifiLinkLayerStats_1_5_Internal(l.456) failed {.code = ERROR_NOT_SUPPORTED, .description = }
+06-15 01:22:05.669  5349  5626 D MobileStatusTracker(0/3): onSignalStrengthsChanged signalStrength=SignalStrength:{mCdma=Invalid,mGsm=Invalid,mWcdma=Invalid,mTdscdma=Invalid,mLte=CellSignalStrengthLte: rssi=-113 rsrp=-112 rsrq=-13 rssnr=2 cqiTableIndex=2147483647 cqi=2147483647 ta=2147483647 level=2 parametersUseForLevel=0,mNr=Invalid,SignalBarInfo{ lteLevel=2 },rat=14,primary=CellSignalStrengthLte} level=2
+06-15 01:22:05.672  5349  5626 D NetworkController: SignalStrength from intent slotId=0
+06-15 01:22:05.754  1147  1260 D connsyslogger: idx=0 Bootup Log: 4 log files! filecount=5 
+06-15 01:22:05.754  1147  1260 D connsyslogger: idx=1 Bootup Log: 4 log files! filecount=5 
+06-15 01:22:05.754  1147  1260 D connsyslogger: idx=2 Bootup Log: 4 log files! filecount=5 
+06-15 01:22:05.754  1147  1260 D connsyslogger: idx=3 Bootup Log: 3 log files! filecount=5 
+06-15 01:22:05.756  1147  1331 I connsyslogger: thrLogWriter: LogBuf=226.171875KB,idx=1
+06-15 01:22:05.894  1442  1765 D NetdEventListenerService: DNS Requested by : 895, 10526, 7
+06-15 01:22:05.894 14024 14931 E msys    : E[N mns:DGWClient]_LogError(304)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+06-15 01:22:05.900  1739  1739 I WifiHAL : Get link layer stats
+06-15 01:22:05.901  1739  1739 I WifiHAL : GetLinkStatsCommand::create
+06-15 01:22:05.901  1739  1739 D android.hardware.wifi@1.0-service-lazy: WifiRequest::create vendor command to iface 40, vendor_id=0x1a11, subcmd=0x1200, res=0
+06-15 01:22:05.901  1739  1739 I android.hardware.wifi@1.0-service-lazy: WifiCommand::requestResponse err=-95
+06-15 01:22:05.901  1739  1739 I WifiHAL : wifi_get_link_stats: result=-3
+06-15 01:22:05.901  1442  1754 E SemWifiVendorHal: getWifiLinkLayerStats_1_5_Internal(l.456) failed {.code = ERROR_NOT_SUPPORTED, .description = }
+06-15 01:22:05.903 14024 14931 E msys    : E[N mns:DGWClient]_LogError(304)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+06-15 01:22:05.903  1442  1765 D NetdEventListenerService: DNS Requested by : 895, 10526, 7
+06-15 01:22:05.982  1147  1258 D connsyslogger: SD_LOG_ROOT is /data/debuglogger/connsyslog/fw.
+06-15 01:22:05.982  1147  1258 D connsyslogger: systemReady:1
+06-15 01:22:05.991  1442  1765 D NetdEventListenerService: DNS Requested by : 895, 10526, 7
+06-15 01:22:05.992 14024 14931 E msys    : E[N mns:DGWClient]_LogError(304)=>Failed to resolve using system DNS resolver, getaddrinfo(): No address associated with hostname
+06-15 01:22:06.532  2051  2181 D BtGatt.GattService: onScanResult to scannerId: 6- eventType=0x10, addressType=1, address=39B36F_E, primaryPhy=1, secondaryPhy=0, advertisingSid=0xff, txPower=127, rssi=-94, periodicAdvInt=0x0
+06-15 01:22:06.534 24511 13866 I NearbyConnections: Found BleAdvertisement [ 0x23 0x47 0x51 0x47 0x30 0x11 0x32 0x4e 0xd4 0x6a 0x22 0xb6 0x08 0xad 0x1e 0x56 0x39 0xf7 0xa6 0x78 0x2d 0xff 0x0d ] (with EndpointId GQG0 and EndpointInfo [ 0x32 0x4e 0xd4 0x6a 0x22 0xb6 0x08 0xad 0x1e 0x56 0x39 0xf7 0xa6 0x78 0x2d 0xff 0x0d ])
+06-15 01:22:06.535 24511 13866 I NearbyConnections: Unable to record discovered endpoint due to null currentDiscoveryPhase
+06-15 01:22:06.535 24511 13866 I NearbyConnections: ClientProxy(254425078 0p:com.google.android.gms.nearby.sharing) reporting onEndpointFound(GQG0)
+06-15 01:22:06.535 24511 13866 I NearbyConnections: ClientProxy(254425078) reporting onEndpointDistanceChanged(GQG0, UNKNOWN)
+06-15 01:22:06.536 24511 13867 I NearbySharing: NearbySharing Internal event EndpointDiscovered(endpointId=GQG0)

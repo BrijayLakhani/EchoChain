@@ -28,6 +28,7 @@ const TOP    = 56;
 const BOTTOM = 140;
 const AMP    = 70;    // horizontal wind amplitude
 const FREQ   = 0.82;
+const TILE   = 1200;  // vertical slice height — keeps each SVG bitmap small
 
 const CHAPTER_SIZE = 5;
 const CHAPTERS: {name: string; color: string; char: string}[] = [
@@ -113,11 +114,19 @@ export default function LevelSelectScreen({navigation}: Props) {
         <View style={{height: contentHeight, width: SCREEN_W}}>
           <JourneyBackground width={SCREEN_W} height={contentHeight} />
 
-          {/* winding trail */}
-          <Svg style={StyleSheet.absoluteFill} width={SCREEN_W} height={contentHeight} pointerEvents="none">
-            <SvgPath d={pathD} stroke="#E4DACB" strokeWidth={14} fill="none" strokeLinecap="round" />
-            <SvgPath d={pathD} stroke="#F4ECDF" strokeWidth={5} fill="none" strokeLinecap="round" strokeDasharray="2 16" />
-          </Svg>
+          {/* winding trail — tiled so no single SVG rasterizes a huge bitmap */}
+          {Array.from({length: Math.ceil(contentHeight / TILE)}).map((_, t) => {
+            const y0 = t * TILE;
+            const th = Math.min(TILE, contentHeight - y0);
+            return (
+              <Svg key={`trail${t}`} pointerEvents="none"
+                style={{position: 'absolute', left: 0, top: y0, width: SCREEN_W, height: th}}
+                width={SCREEN_W} height={th} viewBox={`0 ${y0} ${SCREEN_W} ${th}`}>
+                <SvgPath d={pathD} stroke="#E4DACB" strokeWidth={14} fill="none" strokeLinecap="round" />
+                <SvgPath d={pathD} stroke="#F4ECDF" strokeWidth={5} fill="none" strokeLinecap="round" strokeDasharray="2 16" />
+              </Svg>
+            );
+          })}
 
           {/* chapter labels + mascots */}
           {LEVELS.map((_, i) => {

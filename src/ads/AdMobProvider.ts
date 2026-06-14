@@ -2,6 +2,7 @@ import {AdProvider, RewardResult} from './AdProvider';
 import {
   RewardedAd, RewardedAdEventType, AdEventType, TestIds,
 } from 'react-native-google-mobile-ads';
+import {toast} from '../store/toastStore';
 
 // Real AdMob rewarded ads. IMPORTANT: in development we use Google's TEST ad
 // unit — clicking your OWN live ads gets the AdMob account banned. The real
@@ -32,7 +33,10 @@ export class AdMobProvider implements AdProvider {
       });
       const l2 = ad.addAdEventListener(RewardedAdEventType.EARNED_REWARD, () => { earned = true; });
       const l3 = ad.addAdEventListener(AdEventType.CLOSED, () => done(earned));
-      const l4 = ad.addAdEventListener(AdEventType.ERROR, () => done(false));
+      const l4 = ad.addAdEventListener(AdEventType.ERROR, () => {
+        toast('Ad not available right now — try again soon', 'error');
+        done(false);
+      });
 
       try { ad.load(); } catch { done(false); }
     });

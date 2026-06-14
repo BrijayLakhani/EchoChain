@@ -22,7 +22,7 @@ export default function ProfileScreen({navigation}: Props) {
   const completed = useProgressStore(s => s.completed);
   const streak    = useDailyStore(s => s.streak);
   const coins     = useEconomyStore(s => s.coins);
-  const gems      = useEconomyStore(s => s.gems);
+  const hints     = useEconomyStore(s => s.hints);
 
   const [editing, setEditing] = useState(false);
   const [draft, setDraft]     = useState(name);
@@ -92,7 +92,7 @@ export default function ProfileScreen({navigation}: Props) {
         </Animated.View>
         <Animated.View entering={FadeInDown.delay(60).duration(180)} style={styles.statsRow}>
           <Stat label="Coins" value={`${coins}`} color={Pastel.coin} icon="🪙" />
-          <Stat label="Gems" value={`${gems}`} color={Pastel.grape} icon="💎" />
+          <Stat label="Hints" value={`${hints}`} color={Pastel.sun} icon="💡" />
         </Animated.View>
 
         {/* Avatar picker */}

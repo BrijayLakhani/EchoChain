@@ -63,9 +63,9 @@ export default function HomeScreen({navigation}: Props) {
             <Text style={styles.avatarFace}>{avatar}</Text>
           </TouchableOpacity>
           <Hud
+            showGems={false}
             onPressLives={() => navigation.navigate('Shop')}
             onPressCoins={() => navigation.navigate('Shop')}
-            onPressGems={() => navigation.navigate('Shop')}
           />
           <View style={{flex: 1}} />
           <TouchableOpacity style={styles.round} activeOpacity={0.85} onPress={() => navigation.navigate('Settings')}>

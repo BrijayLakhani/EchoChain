@@ -59,7 +59,7 @@ export default function WinOverlay({
           <LottieView source={require('../assets/win.json')} autoPlay loop={false} style={styles.lottie} />
         )}
 
-        <Animated.View entering={ZoomIn.springify().damping(15).stiffness(260)} style={styles.card}>
+        <Animated.View entering={ZoomIn.duration(210)} style={styles.card}>
           <View style={styles.mascotWrap}>
             <Mascot size={88}
               color={earned >= 3 ? Pastel.mint : earned === 2 ? Pastel.sky : Pastel.sun}

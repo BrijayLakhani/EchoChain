@@ -37,7 +37,7 @@ export default function PreLevelModal({
   return (
     <Modal visible={visible} transparent animationType="none" onRequestClose={onClose}>
       <Animated.View entering={FadeIn.duration(120)} style={styles.backdrop}>
-        <Animated.View entering={ZoomIn.springify().damping(16).stiffness(300)} style={styles.card}>
+        <Animated.View entering={ZoomIn.duration(190)} style={styles.card}>
           {/* Accent header band */}
           <View style={[styles.band, {backgroundColor: accent}]}>
             <Text style={styles.bandLabel}>{daily ? 'DAILY CHALLENGE' : `LEVEL ${levelId}`}</Text>

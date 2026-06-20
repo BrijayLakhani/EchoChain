@@ -1,7 +1,9 @@
-import React, {useRef, useMemo} from 'react';
+import React, {useRef, useMemo, useState, useEffect} from 'react';
 import {
   View, Text, StyleSheet, ScrollView, StatusBar, Pressable, Dimensions,
+  InteractionManager,
 } from 'react-native';
+import LottieView from 'lottie-react-native';
 import Animated, {
   useSharedValue, useAnimatedStyle, withSpring, withRepeat, withTiming, withSequence,
   FadeInDown,
@@ -84,6 +86,15 @@ export default function LevelSelectScreen({navigation}: Props) {
   const scrollRef = useRef<ScrollView>(null);
   const didScroll = useRef(false);
 
+  // The map (100 nodes + tiled SVG) is heavy to mount and was blocking the
+  // navigation transition for several seconds. Render a light loader first,
+  // then build the map after the screen has animated in.
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const task = InteractionManager.runAfterInteractions(() => setReady(true));
+    return () => task.cancel();
+  }, []);
+
   // Centre target for the active level.
   const focusY = Math.max(0, nodeY(currentIndex) - 300);
 
@@ -110,6 +121,14 @@ export default function LevelSelectScreen({navigation}: Props) {
         <View style={{width: 36}} />
       </View>
 
+      {!ready ? (
+        <View style={styles.loader}>
+          <LottieView
+            source={require('../assets/loading.json')}
+            autoPlay loop style={{width: 140, height: 110}} />
+          <Text style={styles.loadingTxt}>Loading journey…</Text>
+        </View>
+      ) : (
       <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false} onContentSizeChange={onContentSize}>
         <View style={{height: contentHeight, width: SCREEN_W}}>
           <JourneyBackground width={SCREEN_W} height={contentHeight} />
@@ -167,6 +186,7 @@ export default function LevelSelectScreen({navigation}: Props) {
           })}
         </View>
       </ScrollView>
+      )}
     </SafeAreaView>
   );
 }
@@ -201,7 +221,7 @@ function PathNode({
 
   return (
     <Animated.View
-      entering={FadeInDown.delay(Math.min(index, 8) * 14).springify().damping(16).stiffness(260)}
+      entering={index < 14 ? FadeInDown.delay(index * 14).springify().damping(16).stiffness(260) : undefined}
       style={[styles.nodeAbs, {left: x - NODE / 2, top: y - NODE / 2}]}>
 
       {current && <Animated.View style={[styles.ring, {borderColor: color}, ringStyle]} />}
@@ -240,6 +260,8 @@ function PathNode({
 
 const styles = StyleSheet.create({
   root: {flex: 1, backgroundColor: Colors.bg},
+  loader: {flex: 1, alignItems: 'center', justifyContent: 'center'},
+  loadingTxt: {marginTop: 8, fontSize: FontSize.sm, fontWeight: '700', color: Colors.textDim},
 
   header: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
